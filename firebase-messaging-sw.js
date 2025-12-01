@@ -3,7 +3,7 @@ importScripts("https://www.gstatic.com/firebasejs/11.1.0/firebase-app-compat.js"
 importScripts("https://www.gstatic.com/firebasejs/11.1.0/firebase-messaging-compat.js");
 
 firebase.initializeApp({
-  apiKey: "YOUR_API_KEY",
+  apiKey: "AIzaSyCfcDDG3e7KTBevfFfl99oaT5Z_hv4q5iY",
   authDomain: "uscout-football-network.firebaseapp.com",
   projectId: "uscout-football-network",
   storageBucket: "uscout-football-network.appspot.com",
