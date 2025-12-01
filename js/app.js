@@ -1,11 +1,14 @@
-// js/app.js (FIXED)
+// js/app.js (FINAL FIXED VERSION)
+
 import { state } from "./firebase.js";
 import { initAuth } from "./auth.js";
+
 import {
   initProfile,
   listenToUsers,
   refreshProfileSidebar,
 } from "./profile.js";
+
 import { initFeed } from "./feed.js";
 import { initHighlights } from "./highlights.js";
 import { initDiscover, renderDiscover } from "./discover.js";
@@ -42,48 +45,50 @@ function setupViewSwitching() {
     btn.addEventListener("click", () => switchView("feed"))
   );
 
-  // Start on home
   window.__switchView = switchView;
+
+  // default
+  switchView("home");
 }
 
 /* -----------------------------------
    REALTIME LISTENERS
 ------------------------------------ */
 function startRealtime() {
-  // Listen to all users
+  // users list (discover)
   listenToUsers(() => {
     renderDiscover();
   });
 
-  // Listen to DMs
+  // DM chats
   startDmListener();
 }
 
 /* -----------------------------------
-   USER UI REFRESHER  
+   WHEN USER UI NEEDS REFRESH
 ------------------------------------ */
 function refreshUserUI() {
   refreshProfileSidebar();
 }
 
 /* -----------------------------------
-   ON USER LOGOUT
+   USER LOGOUT HOOK
 ------------------------------------ */
 function onUserCleared() {
-  // Optionally clear UI
+  // clear UI if needed
 }
 
 /* -----------------------------------
-   APP INIT
+   APP INITIALIZATION
 ------------------------------------ */
 document.addEventListener("DOMContentLoaded", () => {
-  // initialize navigation system
+  // 1. Setup navigation
   setupViewSwitching();
 
-  // AUTH FIRST — ONLY after user loads, init rest of the app
+  // 2. Initialize Firebase Auth FIRST
   initAuth({
     onUserReady: () => {
-      // Initialize UI that needs the user
+      // 3. Init modules AFTER we have a logged in user
       initProfile();
       initFeed();
       initHighlights();
@@ -97,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         greeting.classList.remove("hidden");
       }
 
-      // Realtime listeners
+      // realtime
       startRealtime();
 
       // Notifications
