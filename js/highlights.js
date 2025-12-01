@@ -8,7 +8,7 @@ import {
   onSnapshot,
   getDocs,
   where
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
 
 import { db, state } from "./firebase.js";
 
@@ -23,18 +23,22 @@ export function initHighlights() {
   const container = document.getElementById("highlights-container");
   const loading = document.getElementById("highlights-loading");
 
+  if (!container || !postBtn) return;
+
   // CREATE LINK HIGHLIGHT
   postBtn.addEventListener("click", async () => {
-    const videoUrl = urlInput.value.trim();
-    const title = titleInput.value.trim();
+    const videoUrl = urlInput ? urlInput.value.trim() : "";
+    const title = titleInput ? titleInput.value.trim() : "";
 
     if (!videoUrl) {
-      errorBox.textContent = "Please paste a valid video link.";
-      errorBox.classList.remove("hidden");
+      if (errorBox) {
+        errorBox.textContent = "Please paste a valid video link.";
+        errorBox.classList.remove("hidden");
+      }
       return;
     }
 
-    errorBox.classList.add("hidden");
+    if (errorBox) errorBox.classList.add("hidden");
 
     await addDoc(collection(db, "football_highlights"), {
       userId: state.currentUserId,
@@ -43,8 +47,8 @@ export function initHighlights() {
       timestamp: Date.now(),
     });
 
-    urlInput.value = "";
-    titleInput.value = "";
+    if (urlInput) urlInput.value = "";
+    if (titleInput) titleInput.value = "";
   });
 
   // REALTIME HIGHLIGHT LOADING
@@ -55,10 +59,10 @@ export function initHighlights() {
 
   onSnapshot(q, (snapshot) => {
     container.innerHTML = "";
-    loading.classList.add("hidden");
+    if (loading) loading.classList.add("hidden");
 
-    snapshot.forEach((doc) => {
-      const item = doc.data();
+    snapshot.forEach((docSnap) => {
+      const item = docSnap.data();
       container.appendChild(renderHighlight(item));
     });
   });
@@ -72,7 +76,7 @@ function renderHighlight(item) {
   wrapper.className =
     "bg-slate-900 rounded-xl overflow-hidden shadow-lg border border-slate-700";
 
-  const embedHtml = getEmbed(item.videoUrl);
+  const embedHtml = getEmbed(item.videoUrl || "");
 
   wrapper.innerHTML = `
     <div class="aspect-video bg-black overflow-hidden">
@@ -90,6 +94,10 @@ function renderHighlight(item) {
    AUTO-DETECT VIDEO TYPE
 ------------------------------------ */
 function getEmbed(url) {
+  if (!url) {
+    return '<div class="w-full h-full flex items-center justify-center text-slate-400 text-xs">No video URL</div>';
+  }
+
   // YOUTUBE
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
     const id =
