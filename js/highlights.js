@@ -1,4 +1,4 @@
-// highlights.js (LINK-ONLY VERSION)
+// highlights.js (FINAL WORKING VERSION)
 
 import {
   collection,
@@ -23,19 +23,22 @@ export function initHighlights() {
   const container = document.getElementById("highlights-container");
   const loading = document.getElementById("highlights-loading");
 
-  if (!container) return;
+  if (!container || !postBtn) return;
 
+  // CREATE LINK HIGHLIGHT
   postBtn.addEventListener("click", async () => {
-    const videoUrl = urlInput.value.trim();
-    const title = titleInput.value.trim();
+    const videoUrl = urlInput ? urlInput.value.trim() : "";
+    const title = titleInput ? titleInput.value.trim() : "";
 
     if (!videoUrl) {
-      errorBox.classList.remove("hidden");
-      errorBox.textContent = "Please paste a valid video link.";
+      if (errorBox) {
+        errorBox.textContent = "Please paste a valid video link.";
+        errorBox.classList.remove("hidden");
+      }
       return;
     }
 
-    errorBox.classList.add("hidden");
+    if (errorBox) errorBox.classList.add("hidden");
 
     await addDoc(collection(db, "football_highlights"), {
       userId: state.currentUserId,
@@ -44,10 +47,11 @@ export function initHighlights() {
       timestamp: Date.now(),
     });
 
-    urlInput.value = "";
-    titleInput.value = "";
+    if (urlInput) urlInput.value = "";
+    if (titleInput) titleInput.value = "";
   });
 
+  // REALTIME HIGHLIGHT LOADING
   const q = query(
     collection(db, "football_highlights"),
     orderBy("timestamp", "desc")
@@ -55,10 +59,11 @@ export function initHighlights() {
 
   onSnapshot(q, (snapshot) => {
     container.innerHTML = "";
-    loading.classList.add("hidden");
+    if (loading) loading.classList.add("hidden");
 
     snapshot.forEach((docSnap) => {
-      container.appendChild(renderHighlight(docSnap.data()));
+      const item = docSnap.data();
+      container.appendChild(renderHighlight(item));
     });
   });
 }
@@ -71,13 +76,12 @@ function renderHighlight(item) {
   wrapper.className =
     "bg-slate-900 rounded-xl overflow-hidden shadow-lg border border-slate-700";
 
-  const embed = getEmbed(item.videoUrl);
+  const embedHtml = getEmbed(item.videoUrl || "");
 
   wrapper.innerHTML = `
     <div class="aspect-video bg-black overflow-hidden">
-      ${embed}
+      ${embedHtml}
     </div>
-
     <div class="p-2 text-xs sm:text-sm text-slate-200">
       ${item.title || "Highlight"}
     </div>
@@ -90,40 +94,69 @@ function renderHighlight(item) {
    AUTO-DETECT VIDEO TYPE
 ------------------------------------ */
 function getEmbed(url) {
-  if (!url) return "";
-
-  // YouTube
-  if (url.includes("youtube.com") || url.includes("youtu.be")) {
-    const id = url.split("v=")[1]?.split("&")[0] || url.split("/").pop();
-    return `<iframe class="w-full h-full" src="https://www.youtube.com/embed/${id}" frameborder="0" allowfullscreen></iframe>`;
+  if (!url) {
+    return '<div class="w-full h-full flex items-center justify-center text-slate-400 text-xs">No video URL</div>';
   }
 
-  // TikTok
+  // YOUTUBE
+  if (url.includes("youtube.com") || url.includes("youtu.be")) {
+    const id =
+      url.split("v=")[1]?.split("&")[0] ||
+      url.split("/").pop();
+
+    return `
+      <iframe
+        class="w-full h-full"
+        src="https://www.youtube.com/embed/${id}"
+        frameborder="0"
+        allowfullscreen
+      ></iframe>
+    `;
+  }
+
+  // TIKTOK
   if (url.includes("tiktok.com")) {
     return `
-      <blockquote class="tiktok-embed" cite="${url}">
+      <blockquote class="tiktok-embed" cite="${url}" data-video-url="${url}">
         <a href="${url}"></a>
       </blockquote>
       <script async src="https://www.tiktok.com/embed.js"></script>
     `;
   }
 
-  // Vimeo
+  // VIMEO
   if (url.includes("vimeo.com")) {
     const id = url.split("/").pop();
-    return `<iframe class="w-full h-full" src="https://player.vimeo.com/video/${id}" frameborder="0" allowfullscreen></iframe>`;
+    return `
+      <iframe
+        src="https://player.vimeo.com/video/${id}"
+        class="w-full h-full"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    `;
   }
 
-  // MP4 direct link
+  // DIRECT MP4
   if (url.endsWith(".mp4")) {
-    return `<video class="w-full h-full" controls src="${url}"></video>`;
+    return `
+      <video class="w-full h-full" controls src="${url}"></video>
+    `;
   }
 
-  return `<a href="${url}" target="_blank" class="text-secondary underline block p-3">Open Video</a>`;
+  // fallback
+  return `
+    <div class="p-4 text-center">
+      <a href="${url}" target="_blank" class="text-secondary underline">
+        Open Video
+      </a>
+    </div>
+  `;
 }
 
 /* -----------------------------------
-   LOAD USER HIGHLIGHTS IN PROFILE
+   LOAD USER HIGHLIGHTS (profile modal)
 ------------------------------------ */
 export async function loadUserHighlights(userId) {
   const q = query(
@@ -133,5 +166,8 @@ export async function loadUserHighlights(userId) {
   );
 
   const snap = await getDocs(q);
-  return snap.docs.map((d) => ({ id: d.id, ...d.data() }));
+  return snap.docs.map((d) => ({
+    id: d.id,
+    ...d.data()
+  }));
 }
