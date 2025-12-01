@@ -1,4 +1,5 @@
-// highlights.js
+// highlights.js (FINAL FIXED VERSION)
+
 import {
   collection,
   addDoc,
@@ -9,16 +10,11 @@ import {
   where
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-import {
-  collection,
-  addDoc,
-  query,
-  orderBy,
-  onSnapshot
-} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
 import { db, state } from "./firebase.js";
 
+/* -----------------------------
+   INITIALIZE HIGHLIGHTS PAGE
+------------------------------ */
 export function initHighlights() {
   const urlInput = document.getElementById("highlight-url");
   const titleInput = document.getElementById("highlight-title");
@@ -27,7 +23,7 @@ export function initHighlights() {
   const container = document.getElementById("highlights-container");
   const loading = document.getElementById("highlights-loading");
 
-  // CREATE HIGHLIGHT — LINK ONLY
+  // SUBMIT LINK HIGHLIGHT
   postBtn.addEventListener("click", async () => {
     const videoUrl = urlInput.value.trim();
     const title = titleInput.value.trim();
@@ -51,7 +47,7 @@ export function initHighlights() {
     titleInput.value = "";
   });
 
-  // LOAD HIGHLIGHTS LIVE
+  // REALTIME HIGHLIGHTS
   const q = query(
     collection(db, "football_highlights"),
     orderBy("timestamp", "desc")
@@ -68,7 +64,9 @@ export function initHighlights() {
   });
 }
 
-// RENDER SINGLE HIGHLIGHT
+/* -----------------------------
+   RENDER SINGLE HIGHLIGHT
+------------------------------ */
 function renderHighlight(item) {
   const wrapper = document.createElement("div");
   wrapper.className =
@@ -88,7 +86,9 @@ function renderHighlight(item) {
   return wrapper;
 }
 
-// AUTO-DETECT PLATFORM
+/* -----------------------------
+   AUTO-DETECT PLATFORM
+------------------------------ */
 function getEmbed(url) {
   // YOUTUBE
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
@@ -100,7 +100,6 @@ function getEmbed(url) {
         class="w-full h-full"
         src="https://www.youtube.com/embed/${id}"
         frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
         allowfullscreen
       ></iframe>
     `;
@@ -110,7 +109,7 @@ function getEmbed(url) {
   if (url.includes("tiktok.com")) {
     return `
       <blockquote class="tiktok-embed" cite="${url}" data-video-url="${url}">
-          <a href="${url}"></a>
+        <a href="${url}"></a>
       </blockquote>
       <script async src="https://www.tiktok.com/embed.js"></script>
     `;
@@ -133,15 +132,11 @@ function getEmbed(url) {
   // DIRECT MP4 LINK
   if (url.endsWith(".mp4")) {
     return `
-      <video
-        class="w-full h-full"
-        controls
-        src="${url}"
-      ></video>
+      <video class="w-full h-full" controls src="${url}"></video>
     `;
   }
 
-  // FALLBACK (unknown link)
+  // UNKNOWN VIDEO → fallback link
   return `
     <div class="p-4 text-center">
       <a href="${url}" target="_blank" class="text-secondary underline">
@@ -150,15 +145,21 @@ function getEmbed(url) {
     </div>
   `;
 }
-// PROFILE HIGHLIGHTS LOADING (USED IN public profile modal)
+
+/* -----------------------------
+   LOAD USER HIGHLIGHTS 
+   (REQUIRED BY profile.js)
+------------------------------ */
 export async function loadUserHighlights(userId) {
-  const q = await getDocs(
-    query(
-      collection(db, "football_highlights"),
-      where("userId", "==", userId),
-      orderBy("timestamp", "desc")
-    )
+  const q = query(
+    collection(db, "football_highlights"),
+    where("userId", "==", userId),
+    orderBy("timestamp", "desc")
   );
 
-  return q.docs.map((d) => d.data());
+  const snap = await getDocs(q);
+  return snap.docs.map((d) => ({
+    id: d.id,
+    ...d.data()
+  }));
 }
