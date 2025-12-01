@@ -1,11 +1,10 @@
-// js/app.js
+// js/app.js (FIXED)
 import { state } from "./firebase.js";
 import { initAuth } from "./auth.js";
 import {
   initProfile,
   listenToUsers,
   refreshProfileSidebar,
-  viewUserProfile,
 } from "./profile.js";
 import { initFeed } from "./feed.js";
 import { initHighlights } from "./highlights.js";
@@ -13,6 +12,9 @@ import { initDiscover, renderDiscover } from "./discover.js";
 import { initChat, startDmListener } from "./chat.js";
 import { initNotifications } from "./notifications.js";
 
+/* -----------------------------------
+   VIEW SWITCHING
+------------------------------------ */
 function setupViewSwitching() {
   const views = ["home", "feed", "discover", "highlights", "chat"];
   const buttons = document.querySelectorAll(".view-btn");
@@ -27,11 +29,7 @@ function setupViewSwitching() {
 
     buttons.forEach((btn) => {
       const v = btn.getAttribute("data-view");
-      if (v === view) {
-        btn.classList.add("active-nav");
-      } else {
-        btn.classList.remove("active-nav");
-      }
+      btn.classList.toggle("active-nav", v === view);
     });
   }
 
@@ -44,58 +42,65 @@ function setupViewSwitching() {
     btn.addEventListener("click", () => switchView("feed"))
   );
 
-  switchView("home");
+  // Start on home
   window.__switchView = switchView;
 }
 
+/* -----------------------------------
+   REALTIME LISTENERS
+------------------------------------ */
 function startRealtime() {
+  // Listen to all users
   listenToUsers(() => {
     renderDiscover();
   });
+
+  // Listen to DMs
   startDmListener();
 }
 
+/* -----------------------------------
+   USER UI REFRESHER  
+------------------------------------ */
 function refreshUserUI() {
   refreshProfileSidebar();
 }
 
-function onUserCleared() {}
+/* -----------------------------------
+   ON USER LOGOUT
+------------------------------------ */
+function onUserCleared() {
+  // Optionally clear UI
+}
 
+/* -----------------------------------
+   APP INIT
+------------------------------------ */
 document.addEventListener("DOMContentLoaded", () => {
-  // Initialize modules
-  initProfile();
-  initFeed();
-  initHighlights();
-  initDiscover();
-  initChat();
+  // initialize navigation system
   setupViewSwitching();
 
-  // Floating Glassy Button
-  const floatingBtn = document.getElementById("floating-profile-btn");
-  if (floatingBtn) {
-    floatingBtn.addEventListener("click", () => {
-      if (navigator.vibrate) navigator.vibrate([10]);
-      if (state.currentUserId) viewUserProfile(state.currentUserId);
-    });
-  }
-
-  // Collapsed Sidebar Button
-  const sidebarProfileBtn = document.getElementById("sidebar-profile-btn");
-  if (sidebarProfileBtn) {
-    sidebarProfileBtn.addEventListener("click", () => {
-      if (navigator.vibrate) navigator.vibrate([10]);
-      if (state.currentUserId) viewUserProfile(state.currentUserId);
-    });
-  }
-
-  // Auth
+  // AUTH FIRST — ONLY after user loads, init rest of the app
   initAuth({
     onUserReady: () => {
+      // Initialize UI that needs the user
+      initProfile();
+      initFeed();
+      initHighlights();
+      initDiscover();
+      initChat();
+
+      // Greeting
       const greeting = document.getElementById("user-greeting");
       if (greeting && state.currentUserProfile) {
         greeting.textContent = `Welcome, ${state.currentUserProfile.name}`;
         greeting.classList.remove("hidden");
       }
+
+      // Realtime listeners
+      startRealtime();
+
+      // Notifications
       initNotifications();
     },
 
