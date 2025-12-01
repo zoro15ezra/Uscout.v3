@@ -10,7 +10,6 @@ import { escapeHtml } from "./utils.js";
 import { viewUserProfile } from "./profile.js";
 import { openDirectChatWith } from "./chat.js";
 
-// keep a module-level search term so renderDiscover can use it
 let discoverSearchTerm = "";
 
 export function initDiscover() {
@@ -33,10 +32,8 @@ export function renderDiscover() {
   if (loading) loading.style.display = "none";
   container.innerHTML = "";
 
-  // start from all other users
   let others = state.allUsers.filter((u) => u.id !== state.currentUserId);
 
-  // apply search filter if any text
   const term = discoverSearchTerm.trim();
   if (term.length > 0) {
     others = others.filter((user) => {
@@ -51,6 +48,7 @@ export function renderDiscover() {
         .filter(Boolean)
         .join(" ")
         .toLowerCase();
+
       return parts.includes(term);
     });
   }
@@ -69,9 +67,10 @@ export function renderDiscover() {
     const card = document.createElement("div");
     card.className =
       "user-card bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg border border-slate-700 transition cursor-pointer";
+    card.setAttribute("data-view-user", user.id);
 
     card.innerHTML = `
-      <div class="flex items-start justify-between mb-3" data-view-user="${user.id}">
+      <div class="flex items-start justify-between mb-3">
         <div class="flex items-center gap-3">
           <div class="w-10 h-10 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-sm">
             ${escapeHtml((user.name || "P")[0].toUpperCase())}
@@ -144,23 +143,22 @@ export function renderDiscover() {
       </div>
     `;
 
-    card
-      .querySelector(`[data-view-user="${user.id}"]`)
-      .addEventListener("click", () => viewUserProfile(user.id));
+    // FULL CARD → open public profile
+    card.addEventListener("click", () => viewUserProfile(user.id));
 
-    card
-      .querySelector(`[data-toggle-follow="${user.id}"]`)
-      .addEventListener("click", (e) => {
-        e.stopPropagation();
-        toggleFollow(user.id);
-      });
+    // STOP PROPAGATION for follow
+    const followBtn = card.querySelector(`[data-toggle-follow="${user.id}"]`);
+    followBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleFollow(user.id);
+    });
 
-    card
-      .querySelector(`[data-dm-user="${user.id}"]`)
-      .addEventListener("click", (e) => {
-        e.stopPropagation();
-        openDirectChatWith(user.id);
-      });
+    // STOP PROPAGATION for DM
+    const dmBtn = card.querySelector(`[data-dm-user="${user.id}"]`);
+    dmBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      openDirectChatWith(user.id);
+    });
 
     container.appendChild(card);
   });
