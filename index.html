@@ -423,80 +423,59 @@
       </section>
 
       <!-- HIGHLIGHTS -->
-      <section id="highlights-view" class="view-container hidden">
-        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
-          Player Highlights
-        </h1>
-        <p class="text-slate-400 mb-4 text-xs sm:text-sm">
-          Upload your best clips to showcase your talent.
-        </p>
+     <!-- HIGHLIGHTS -->
+<section id="highlights-view" class="view-container hidden">
+  <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
+    Player Highlights
+  </h1>
+  <p class="text-slate-400 mb-4 text-xs sm:text-sm">
+    Paste video links to showcase your talent.
+  </p>
 
-        <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
-          <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
-            <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
-          </h2>
+  <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
+    <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
+      <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
+    </h2>
 
-          <label
-            for="highlight-file"
-            class="block w-full text-center py-3 border-2 border-dashed border-secondary/50 rounded-lg cursor-pointer bg-slate-950 hover:bg-slate-900 transition duration-150 mb-3 text-xs sm:text-sm"
-          >
-            <i class="fa-solid fa-video mb-1 text-secondary"></i><br />
-            <span id="file-upload-label" class="font-semibold text-slate-100">
-              Select a video file
-            </span>
-          </label>
-          <input
-            type="file"
-            id="highlight-file"
-            accept="video/mp4,video/quicktime,video/webm"
-            class="hidden"
-          />
+    <input
+      type="url"
+      id="highlight-url"
+      placeholder="Paste a YouTube / TikTok / Vimeo / MP4 link..."
+      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+             focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm mb-3"
+    />
 
-          <div class="text-center text-[11px] text-slate-500 mb-3">-- OR --</div>
+    <input
+      type="text"
+      id="highlight-title"
+      placeholder="Give your highlight a title..."
+      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+             focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm"
+    />
 
-          <input
-            type="url"
-            id="highlight-url"
-            placeholder="Paste a video link (YouTube, etc.)"
-            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 text-xs sm:text-sm mb-2"
-          />
+    <div class="flex justify-end mt-2">
+      <button
+        id="highlight-post-button"
+        class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
+               shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
+      >
+        Share Highlight
+      </button>
+    </div>
 
-          <input
-            type="text"
-            id="highlight-title"
-            placeholder="Give your highlight a title..."
-            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 text-xs sm:text-sm"
-          />
+    <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
+      Please paste a valid video link.
+    </p>
+  </div>
 
-          <div class="flex justify-end mt-2">
-            <button
-              id="highlight-post-button"
-              class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
-            >
-              Share Highlight
-            </button>
-          </div>
-          <p
-            id="highlight-error"
-            class="text-xs text-red-300 mt-2 hidden"
-          >
-            Please provide a video file or link.
-          </p>
-        </div>
+  <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+    <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
+      <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+      <p>Loading Highlights...</p>
+    </div>
+  </div>
+</section>
 
-        <div
-          id="highlights-container"
-          class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
-        >
-          <div
-            id="highlights-loading"
-            class="col-span-full text-center p-8 text-slate-400 text-xs"
-          >
-            <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
-            <p>Loading Highlights...</p>
-          </div>
-        </div>
-      </section>
 
       <!-- CHAT (WhatsApp-style with DM list + current chat) -->
       <section id="chat-view" class="view-container hidden">
