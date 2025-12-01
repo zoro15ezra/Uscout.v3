@@ -268,91 +268,42 @@
         </div>
       </section>
 
-      <!-- FEED -->
+      
+<!-- FEED -->
       <section id="feed-view" class="view-container hidden">
+
+        <!-- FLOATING GLASSY MY PROFILE BUTTON -->
+        <button
+          id="floating-profile-btn"
+          class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 
+                 w-14 h-14 sm:w-16 sm:h-16 rounded-full
+                 backdrop-blur-xl bg-white/10 
+                 border border-white/20 shadow-xl 
+                 flex items-center justify-center
+                 hover:scale-110 transition-all duration-300 
+                 hover:bg-white/20 hover:border-white/30
+                 active:scale-95"
+        >
+          <i class="fa-solid fa-user text-white text-xl drop-shadow-lg"></i>
+        </button>
+
         <div class="flex flex-col md:flex-row gap-4 md:gap-6">
 
-          <!-- SIDEBAR PROFILE -->
-          <aside class="hidden md:block md:w-1/3 lg:w-1/4">
-            <div
-              id="user-info-card"
-              class="bg-slate-900 p-4 rounded-xl shadow-lg border border-slate-700 sticky top-28 space-y-3"
+          <!-- COLLAPSED SIDEBAR MY PROFILE BUTTON -->
+          <div class="hidden md:flex md:w-1/3 lg:w-1/4">
+            <button
+              id="sidebar-profile-btn"
+              class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 rounded-xl 
+                     border border-slate-700 hover:bg-slate-800 transition text-sm flex 
+                     items-center justify-center gap-2"
             >
-              <h3 class="text-sm font-bold text-slate-50 flex items-center gap-2">
-                <i class="fa-solid fa-user-check text-secondary"></i> My Profile
-              </h3>
-
-              <div class="space-y-2 text-xs">
-                <div>
-                  <p class="text-[11px] text-slate-400">Player Name</p>
-                  <p id="profile-name-display" class="font-semibold text-slate-50 truncate">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Position</p>
-                  <p id="profile-position-display" class="text-slate-100 font-medium">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Club / Location</p>
-                  <p id="profile-club-display" class="text-slate-100">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Email</p>
-                  <p id="profile-email-display" class="text-slate-100 break-words">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Phone</p>
-                  <p id="profile-phone-display" class="text-slate-100">
-                    Not set
-                  </p>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">Social</p>
-                <div class="flex flex-wrap gap-1 text-[11px]">
-                  <span id="profile-instagram-display" class="px-2 py-1 rounded-full bg-pink-500/20 text-pink-300 hidden"></span>
-                  <span id="profile-twitter-display" class="px-2 py-1 rounded-full bg-sky-500/20 text-sky-300 hidden"></span>
-                  <span id="profile-tiktok-display" class="px-2 py-1 rounded-full bg-slate-50/10 text-slate-100 hidden"></span>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">Network</p>
-                <div class="flex gap-4 text-[11px]">
-                  <button id="followers-btn" class="hover:text-secondary">
-                    <span id="followers-count" class="font-bold">0</span>
-                    <span class="text-slate-300"> Followers</span>
-                  </button>
-                  <button id="following-btn" class="hover:text-secondary">
-                    <span id="following-count" class="font-bold">0</span>
-                    <span class="text-slate-300"> Following</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">User ID</p>
-                <code
-                  id="user-id-display"
-                  class="text-[10px] break-all bg-slate-800 p-1.5 rounded font-mono text-secondary cursor-pointer"
-                  title="Click to copy"
-                >
-                  Loading...
-                </code>
-              </div>
-            </div>
-          </aside>
+              <i class="fa-solid fa-user text-secondary"></i>
+              My Profile
+            </button>
+          </div>
 
           <!-- MAIN FEED -->
-          <section class="w-full md:w-2/3 lg:w-3/4 space-y-4">
+          <section class="flex-grow space-y-4">
             <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg border border-slate-700">
               <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
                 <i class="fa-solid fa-pen-nib"></i> Share Your Update
@@ -360,13 +311,18 @@
               <textarea
                 id="post-content"
                 rows="3"
-                class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 resize-none text-slate-50 text-sm"
+                class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+                       focus:ring-2 focus:ring-secondary focus:border-secondary transition 
+                       duration-150 resize-none text-slate-50 text-sm"
                 placeholder="What's happening on the pitch or off it?"
               ></textarea>
               <div class="flex justify-end mt-2">
                 <button
                   id="post-button"
-                  class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-emerald-500 transition duration-150 disabled:bg-emerald-900 disabled:text-emerald-400 disabled:cursor-not-allowed text-xs sm:text-sm"
+                  class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
+                         shadow-md hover:bg-emerald-500 transition duration-150 
+                         disabled:bg-emerald-900 disabled:text-emerald-400 disabled:cursor-not-allowed 
+                         text-xs sm:text-sm"
                   disabled
                 >
                   Post Update
@@ -387,7 +343,7 @@
         </div>
       </section>
 
-      <!-- DISCOVER -->
+<!-- DISCOVER -->
       <section id="discover-view" class="view-container hidden">
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
           Discover Players
@@ -422,61 +378,59 @@
         ></div>
       </section>
 
+      
       <!-- HIGHLIGHTS -->
-     <!-- HIGHLIGHTS -->
-<section id="highlights-view" class="view-container hidden">
-  <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
-    Player Highlights
-  </h1>
-  <p class="text-slate-400 mb-4 text-xs sm:text-sm">
-    Paste video links to showcase your talent.
-  </p>
+      <section id="highlights-view" class="view-container hidden">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
+          Player Highlights
+        </h1>
+        <p class="text-slate-400 mb-4 text-xs sm:text-sm">
+          Paste video links to showcase your talent.
+        </p>
 
-  <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
-    <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
-      <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
-    </h2>
+        <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
+          <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
+          </h2>
 
-    <input
-      type="url"
-      id="highlight-url"
-      placeholder="Paste a YouTube / TikTok / Vimeo / MP4 link..."
-      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-             focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm mb-3"
-    />
+          <input
+            type="url"
+            id="highlight-url"
+            placeholder="Paste a YouTube / TikTok / Vimeo / MP4 link..."
+            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm mb-3"
+          />
 
-    <input
-      type="text"
-      id="highlight-title"
-      placeholder="Give your highlight a title..."
-      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-             focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm"
-    />
+          <input
+            type="text"
+            id="highlight-title"
+            placeholder="Give your highlight a title..."
+            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm"
+          />
 
-    <div class="flex justify-end mt-2">
-      <button
-        id="highlight-post-button"
-        class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
-               shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
-      >
-        Share Highlight
-      </button>
-    </div>
+          <div class="flex justify-end mt-2">
+            <button
+              id="highlight-post-button"
+              class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
+                     shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
+            >
+              Share Highlight
+            </button>
+          </div>
 
-    <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
-      Please paste a valid video link.
-    </p>
-  </div>
+          <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
+            Please paste a valid video link.
+          </p>
+        </div>
 
-  <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-    <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
-      <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
-      <p>Loading Highlights...</p>
-    </div>
-  </div>
-</section>
-
-
+        <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+          <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
+            <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+            <p>Loading Highlights...</p>
+          </div>
+        </div>
+      </section>
       <!-- CHAT (WhatsApp-style with DM list + current chat) -->
       <section id="chat-view" class="view-container hidden">
         <div
