@@ -1,4 +1,3 @@
-
 // js/app.js
 import { state } from "./firebase.js";
 import { initAuth } from "./auth.js";
@@ -6,6 +5,7 @@ import {
   initProfile,
   listenToUsers,
   refreshProfileSidebar,
+  viewUserProfile,
 } from "./profile.js";
 import { initFeed } from "./feed.js";
 import { initHighlights } from "./highlights.js";
@@ -64,6 +64,7 @@ function onUserCleared() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  // Init feature modules
   initProfile();
   initFeed();
   initHighlights();
@@ -71,6 +72,25 @@ document.addEventListener("DOMContentLoaded", () => {
   initChat();
   setupViewSwitching();
 
+  // Glassy floating "My Profile" button behaviour
+  const floatingBtn = document.getElementById("floating-profile-btn");
+  if (floatingBtn) {
+    floatingBtn.addEventListener("click", () => {
+      // small haptic if available
+      if (navigator.vibrate) {
+        try {
+          navigator.vibrate([10]);
+        } catch (e) {
+          // ignore vibration errors
+        }
+      }
+
+      if (!state.currentUserId) return;
+      viewUserProfile(state.currentUserId);
+    });
+  }
+
+  // Auth bootstrap
   initAuth({
     onUserReady: () => {
       const greeting = document.getElementById("user-greeting");
