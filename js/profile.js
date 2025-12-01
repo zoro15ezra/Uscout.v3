@@ -19,27 +19,33 @@ import { loadUserHighlights } from "./highlights.js";
 import { toggleFollow } from "./discover.js";
 import { openDirectChatWith } from "./chat.js";
 
+
 export function initProfile() {
   const openProfileBtn = document.getElementById("open-profile-btn");
+  const floatingProfileBtn = document.getElementById("floating-profile-btn");
+  const sidebarProfileBtn = document.getElementById("sidebar-profile-btn");
   const profileModal = document.getElementById("profile-modal");
   const profileCancelBtn = document.getElementById("profile-cancel-btn");
   const profileForm = document.getElementById("profile-form");
   const userIdDisplay = document.getElementById("user-id-display");
 
-  openProfileBtn?.addEventListener("click", () => {
+  function openProfileModal() {
     if (!state.currentUserProfile) return;
     const p = state.currentUserProfile;
     document.getElementById("profile-name-input").value = p.name || "";
-    document.getElementById("profile-position-input").value =
-      p.position || "Unspecified";
+    document.getElementById("profile-position-input").value = p.position || "Unspecified";
     document.getElementById("profile-club-input").value = p.club || "";
     document.getElementById("profile-phone-input").value = p.phone || "";
-    document.getElementById("profile-instagram-input").value =
-      p.instagram || "";
+    document.getElementById("profile-instagram-input").value = p.instagram || "";
     document.getElementById("profile-twitter-input").value = p.twitter || "";
     document.getElementById("profile-tiktok-input").value = p.tiktok || "";
-    toggleModal(profileModal, true);
-  });
+    if (userIdDisplay) userIdDisplay.textContent = state.currentUserId || "";
+    toggleModal("profile-modal", true);
+  }
+
+  openProfileBtn?.addEventListener("click", openProfileModal);
+  floatingProfileBtn?.addEventListener("click", openProfileModal);
+  sidebarProfileBtn?.addEventListener("click", openProfileModal);
 
   profileCancelBtn?.addEventListener("click", () =>
     toggleModal(profileModal, false)
