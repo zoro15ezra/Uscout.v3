@@ -269,43 +269,90 @@
       </section>
 
       <!-- FEED -->
-            <!-- FEED -->
       <section id="feed-view" class="view-container hidden">
-
-        <!-- FLOATING GLASSY MY PROFILE BUTTON -->
-        <button
-          id="floating-profile-btn"
-          class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 
-                 w-14 h-14 sm:w-16 sm:h-16 rounded-full
-                 backdrop-blur-xl bg-white/10 
-                 border border-white/20 shadow-xl 
-                 flex items-center justify-center
-                 hover:scale-110 transition-all duration-300 
-                 hover:bg-white/20 hover:border-white/30
-                 active:scale-95"
-        >
-          <i class="fa-solid fa-user text-white text-xl drop-shadow-lg"></i>
-        </button>
-
         <div class="flex flex-col md:flex-row gap-4 md:gap-6">
 
-          <!-- COLLAPSED SIDEBAR "MY PROFILE" BUTTON (Option C) -->
-          <div class="hidden md:flex md:w-1/3 lg:w-1/4">
-            <button
-              id="sidebar-profile-btn"
-              class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 rounded-xl 
-                     border border-slate-700 hover:bg-slate-800 transition text-sm flex 
-                     items-center justify-center gap-2"
+          <!-- SIDEBAR PROFILE -->
+          <aside class="hidden md:block md:w-1/3 lg:w-1/4">
+            <div
+              id="user-info-card"
+              class="bg-slate-900 p-4 rounded-xl shadow-lg border border-slate-700 sticky top-28 space-y-3"
             >
-              <i class="fa-solid fa-user text-secondary"></i>
-              My Profile
-            </button>
-          </div>
+              <h3 class="text-sm font-bold text-slate-50 flex items-center gap-2">
+                <i class="fa-solid fa-user-check text-secondary"></i> My Profile
+              </h3>
 
-          <!-- FEED MAIN COLUMN -->
-          <section class="flex-grow space-y-4">
+              <div class="space-y-2 text-xs">
+                <div>
+                  <p class="text-[11px] text-slate-400">Player Name</p>
+                  <p id="profile-name-display" class="font-semibold text-slate-50 truncate">
+                    ...
+                  </p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-slate-400">Position</p>
+                  <p id="profile-position-display" class="text-slate-100 font-medium">
+                    ...
+                  </p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-slate-400">Club / Location</p>
+                  <p id="profile-club-display" class="text-slate-100">
+                    ...
+                  </p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-slate-400">Email</p>
+                  <p id="profile-email-display" class="text-slate-100 break-words">
+                    ...
+                  </p>
+                </div>
+                <div>
+                  <p class="text-[11px] text-slate-400">Phone</p>
+                  <p id="profile-phone-display" class="text-slate-100">
+                    Not set
+                  </p>
+                </div>
+              </div>
 
-            <!-- CREATE POST BOX -->
+              <div class="pt-2 border-t border-slate-700 mt-2">
+                <p class="text-[11px] text-slate-400 mb-1">Social</p>
+                <div class="flex flex-wrap gap-1 text-[11px]">
+                  <span id="profile-instagram-display" class="px-2 py-1 rounded-full bg-pink-500/20 text-pink-300 hidden"></span>
+                  <span id="profile-twitter-display" class="px-2 py-1 rounded-full bg-sky-500/20 text-sky-300 hidden"></span>
+                  <span id="profile-tiktok-display" class="px-2 py-1 rounded-full bg-slate-50/10 text-slate-100 hidden"></span>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-700 mt-2">
+                <p class="text-[11px] text-slate-400 mb-1">Network</p>
+                <div class="flex gap-4 text-[11px]">
+                  <button id="followers-btn" class="hover:text-secondary">
+                    <span id="followers-count" class="font-bold">0</span>
+                    <span class="text-slate-300"> Followers</span>
+                  </button>
+                  <button id="following-btn" class="hover:text-secondary">
+                    <span id="following-count" class="font-bold">0</span>
+                    <span class="text-slate-300"> Following</span>
+                  </button>
+                </div>
+              </div>
+
+              <div class="pt-2 border-t border-slate-700 mt-2">
+                <p class="text-[11px] text-slate-400 mb-1">User ID</p>
+                <code
+                  id="user-id-display"
+                  class="text-[10px] break-all bg-slate-800 p-1.5 rounded font-mono text-secondary cursor-pointer"
+                  title="Click to copy"
+                >
+                  Loading...
+                </code>
+              </div>
+            </div>
+          </aside>
+
+          <!-- MAIN FEED -->
+          <section class="w-full md:w-2/3 lg:w-3/4 space-y-4">
             <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg border border-slate-700">
               <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
                 <i class="fa-solid fa-pen-nib"></i> Share Your Update
@@ -313,18 +360,13 @@
               <textarea
                 id="post-content"
                 rows="3"
-                class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-                       focus:ring-2 focus:ring-secondary focus:border-secondary transition 
-                       duration-150 resize-none text-slate-50 text-sm"
+                class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 resize-none text-slate-50 text-sm"
                 placeholder="What's happening on the pitch or off it?"
               ></textarea>
               <div class="flex justify-end mt-2">
                 <button
                   id="post-button"
-                  class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
-                         shadow-md hover:bg-emerald-500 transition duration-150 
-                         disabled:bg-emerald-900 disabled:text-emerald-400 disabled:cursor-not-allowed 
-                         text-xs sm:text-sm"
+                  class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-emerald-500 transition duration-150 disabled:bg-emerald-900 disabled:text-emerald-400 disabled:cursor-not-allowed text-xs sm:text-sm"
                   disabled
                 >
                   Post Update
@@ -332,7 +374,6 @@
               </div>
             </div>
 
-            <!-- FEED LOADING INDICATOR -->
             <div
               id="loading-indicator"
               class="text-center p-8 text-slate-400 text-xs"
@@ -341,9 +382,7 @@
               <p>Loading Feed...</p>
             </div>
 
-            <!-- FEED POSTS -->
             <div id="feed-container" class="space-y-4"></div>
-
           </section>
         </div>
       </section>
@@ -365,9 +404,7 @@
             id="discover-search"
             type="text"
             placeholder="Search by name, position, club or social handle"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
-                   focus:ring-2 focus:ring-secondary focus:border-secondary 
-                   text-xs sm:text-sm text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm text-slate-50"
           />
         </div>
 
@@ -383,76 +420,93 @@
           id="discover-container"
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"
         ></div>
-     </div>
-</section> <!-- CLOSE DISCOVER SECTION PROPERLY -->
-</section> 
-<!-- HIGHLIGHTS -->
-<section id="highlights-view" class="view-container hidden">
+      </section>
 
-  <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
-    Player Highlights
-  </h1>
-  <p class="text-slate-400 mb-4 text-xs sm:text-sm">
-    Upload your best clips to showcase your talent.
-  </p>
+      <!-- HIGHLIGHTS -->
+      <section id="highlights-view" class="view-container hidden">
+        <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
+          Player Highlights
+        </h1>
+        <p class="text-slate-400 mb-4 text-xs sm:text-sm">
+          Upload your best clips to showcase your talent.
+        </p>
 
-  <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
-    <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
-      <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
-    </h2>
+        <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
+          <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
+            <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
+          </h2>
 
-    <input
-      type="url"
-      id="highlight-url"
-      placeholder="Paste a video link (YouTube, TikTok, Vimeo, MP4...)"
-      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-             focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
-             text-xs sm:text-sm mb-3"
-    />
+          <label
+            for="highlight-file"
+            class="block w-full text-center py-3 border-2 border-dashed border-secondary/50 rounded-lg cursor-pointer bg-slate-950 hover:bg-slate-900 transition duration-150 mb-3 text-xs sm:text-sm"
+          >
+            <i class="fa-solid fa-video mb-1 text-secondary"></i><br />
+            <span id="file-upload-label" class="font-semibold text-slate-100">
+              Select a video file
+            </span>
+          </label>
+          <input
+            type="file"
+            id="highlight-file"
+            accept="video/mp4,video/quicktime,video/webm"
+            class="hidden"
+          />
 
-    <input
-      type="text"
-      id="highlight-title"
-      placeholder="Give your highlight a title..."
-      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-             focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
-             text-xs sm:text-sm"
-    />
+          <div class="text-center text-[11px] text-slate-500 mb-3">-- OR --</div>
 
-    <div class="flex justify-end mt-2">
-      <button
-        id="highlight-post-button"
-        class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
-               shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
-      >
-        Share Highlight
-      </button>
-    </div>
+          <input
+            type="url"
+            id="highlight-url"
+            placeholder="Paste a video link (YouTube, etc.)"
+            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 text-xs sm:text-sm mb-2"
+          />
 
-    <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
-      Please paste a valid video link.
-    </p>
-  </div>
+          <input
+            type="text"
+            id="highlight-title"
+            placeholder="Give your highlight a title..."
+            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 text-xs sm:text-sm"
+          />
 
-  <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
-    <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
-      <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
-      <p>Loading Highlights...</p>
-    </div>
-  </div>
-</section>
+          <div class="flex justify-end mt-2">
+            <button
+              id="highlight-post-button"
+              class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
+            >
+              Share Highlight
+            </button>
+          </div>
+          <p
+            id="highlight-error"
+            class="text-xs text-red-300 mt-2 hidden"
+          >
+            Please provide a video file or link.
+          </p>
+        </div>
 
-      <!-- CHAT -->
+        <div
+          id="highlights-container"
+          class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4"
+        >
+          <div
+            id="highlights-loading"
+            class="col-span-full text-center p-8 text-slate-400 text-xs"
+          >
+            <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+            <p>Loading Highlights...</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- CHAT (WhatsApp-style with DM list + current chat) -->
       <section id="chat-view" class="view-container hidden">
         <div
-          class="flex flex-col md:flex-row h-[70vh] bg-slate-900 rounded-xl shadow-lg 
-                 border border-slate-700 overflow-hidden"
+          class="flex flex-col md:flex-row h-[70vh] bg-slate-900 rounded-xl shadow-lg border border-slate-700 overflow-hidden"
         >
           <!-- CHAT LIST -->
           <div
             id="chat-list"
-            class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-800 
-                   p-3 sm:p-4 space-y-4 overflow-y-auto"
+            class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-800 p-3 sm:p-4 space-y-4 overflow-y-auto"
           >
             <div class="flex items-center justify-between">
               <h2 class="text-sm sm:text-base font-bold text-slate-50 flex items-center gap-2">
@@ -464,8 +518,7 @@
               <p class="text-[11px] text-slate-400 mb-1">Channels</p>
               <button
                 data-chat-id="global_team_chat"
-                class="chat-room-btn w-full text-left p-3 bg-slate-950 hover:bg-slate-800 
-                       rounded-lg transition duration-150 border border-slate-700 text-xs sm:text-sm"
+                class="chat-room-btn w-full text-left p-3 bg-slate-950 hover:bg-slate-800 rounded-lg transition duration-150 border border-slate-700 text-xs sm:text-sm"
               >
                 <p class="font-semibold text-secondary flex items-center gap-2">
                   <i class="fa-solid fa-earth-europe"></i> Global Team Chat
@@ -513,8 +566,7 @@
 
             <div
               id="messages-container"
-              class="flex-grow p-3 sm:p-4 space-y-2 overflow-y-auto 
-                     text-xs sm:text-sm bg-slate-950"
+              class="flex-grow p-3 sm:p-4 space-y-2 overflow-y-auto text-xs sm:text-sm bg-slate-950"
             >
               <div
                 id="chat-placeholder"
@@ -534,15 +586,11 @@
                   type="text"
                   id="chat-message-input"
                   placeholder="Type your message..."
-                  class="flex-grow p-3 bg-slate-900 border border-slate-700 
-                         rounded-full focus:ring-secondary 
-                         focus:border-secondary text-xs sm:text-sm text-slate-50"
+                  class="flex-grow p-3 bg-slate-900 border border-slate-700 rounded-full focus:ring-secondary focus:border-secondary text-xs sm:text-sm text-slate-50"
                 />
                 <button
                   id="send-chat-btn"
-                  class="bg-secondary text-slate-950 font-semibold py-2 px-4 sm:px-6 
-                         rounded-full hover:bg-emerald-500 transition duration-150 
-                         text-xs sm:text-sm"
+                  class="bg-secondary text-slate-950 font-semibold py-2 px-4 sm:px-6 rounded-full hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
                 >
                   Send
                 </button>
@@ -554,10 +602,9 @@
 
     </main>
 
-    <!-- MOBILE NAVIGATION -->
+    <!-- MOBILE NAV -->
     <footer
-      class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 
-             border-t border-slate-800 shadow-xl z-40"
+      class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40"
     >
       <nav class="flex justify-around text-[11px]">
         <button data-view="home" class="view-btn flex flex-col items-center p-2 text-secondary active-nav">
@@ -583,6 +630,7 @@
       </nav>
     </footer>
   </div>
+
   <!-- PROFILE EDIT MODAL -->
   <div
     id="profile-modal"
@@ -726,7 +774,7 @@
     </div>
   </div>
 
-  <!-- PUBLIC USER PROFILE MODAL -->
+  <!-- USER PUBLIC PROFILE MODAL -->
   <div
     id="user-profile-modal"
     class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
@@ -744,8 +792,7 @@
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div
-            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white flex items-center justify-center 
-                   text-emerald-700 font-bold text-2xl sm:text-3xl shadow-lg"
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white flex items-center justify-center text-emerald-700 font-bold text-2xl sm:text-3xl shadow-lg"
           >
             <span id="user-profile-avatar"></span>
           </div>
@@ -819,15 +866,13 @@
         <div class="mt-4 flex flex-wrap gap-2">
           <button
             id="user-profile-follow-btn"
-            class="bg-white text-emerald-700 font-semibold py-2 px-6 rounded-full 
-                   hover:bg-emerald-50 text-xs sm:text-sm"
+            class="bg-white text-emerald-700 font-semibold py-2 px-6 rounded-full hover:bg-emerald-50 text-xs sm:text-sm"
           >
             Follow
           </button>
           <button
             id="user-profile-message-btn"
-            class="bg-emerald-900/40 text-white font-semibold py-2 px-6 rounded-full 
-                   hover:bg-emerald-800 text-xs sm:text-sm flex items-center gap-2"
+            class="bg-emerald-900/40 text-white font-semibold py-2 px-6 rounded-full hover:bg-emerald-800 text-xs sm:text-sm flex items-center gap-2"
           >
             <i class="fa-solid fa-paper-plane"></i> Message
           </button>
@@ -870,15 +915,12 @@
     </div>
   </div>
 
-  <!-- SCRIPTS -->
- <script type="module" src="./js/app.js"></script>
-
+  <!-- Firebase & App Scripts -->
+  <script type="module" src="./js/app.js"></script>
   <script>
-    // Service worker disabled for demo
-    console.log("SW disabled");
+  // Service worker for messaging disabled for demo
+  console.log("SW disabled");
   </script>
 
 </body>
 </html>
-
-
