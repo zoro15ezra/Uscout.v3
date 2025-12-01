@@ -385,44 +385,59 @@
         ></div>
       </section>
             <!-- HIGHLIGHTS -->
-   <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
-  <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
-    <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
-  </h2>
+<section id="highlights-view" class="view-container hidden">
+  <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
+    Player Highlights
+  </h1>
+  <p class="text-slate-400 mb-4 text-xs sm:text-sm">
+    Upload your best clips to showcase your talent.
+  </p>
 
-  <input
-    type="url"
-    id="highlight-url"
-    placeholder="Paste a video link (YouTube, TikTok, Vimeo, MP4...)"
-    class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-           focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
-           text-xs sm:text-sm mb-3"
-  />
+  <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg mb-4 border border-slate-700">
+    <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
+      <i class="fa-solid fa-cloud-arrow-up"></i> Share Your Highlight
+    </h2>
 
-  <input
-    type="text"
-    id="highlight-title"
-    placeholder="Give your highlight a title..."
-    class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-           focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
-           text-xs sm:text-sm"
-  />
+    <input
+      type="url"
+      id="highlight-url"
+      placeholder="Paste a video link (YouTube, TikTok, Vimeo, MP4...)"
+      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+             focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
+             text-xs sm:text-sm mb-3"
+    />
 
-  <div class="flex justify-end mt-2">
-    <button
-      id="highlight-post-button"
-      class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
-             shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
-    >
-      Share Highlight
-    </button>
+    <input
+      type="text"
+      id="highlight-title"
+      placeholder="Give your highlight a title..."
+      class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+             focus:ring-2 focus:ring-secondary focus:border-secondary transition duration-150 
+             text-xs sm:text-sm"
+    />
+
+    <div class="flex justify-end mt-2">
+      <button
+        id="highlight-post-button"
+        class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
+               shadow-md hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
+      >
+        Share Highlight
+      </button>
+    </div>
+
+    <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
+      Please paste a valid video link.
+    </p>
   </div>
 
-  <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden">
-    Please paste a valid video link.
-  </p>
-</div>
-
+  <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
+    <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
+      <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+      <p>Loading Highlights...</p>
+    </div>
+  </div>
+</section>
 
       <!-- CHAT -->
       <section id="chat-view" class="view-container hidden">
