@@ -1,4 +1,4 @@
-// highlights.js (FINAL FIXED VERSION)
+// highlights.js (FINAL WORKING VERSION)
 
 import {
   collection,
@@ -12,9 +12,9 @@ import {
 
 import { db, state } from "./firebase.js";
 
-/* -----------------------------
+/* -----------------------------------
    INITIALIZE HIGHLIGHTS PAGE
------------------------------- */
+------------------------------------ */
 export function initHighlights() {
   const urlInput = document.getElementById("highlight-url");
   const titleInput = document.getElementById("highlight-title");
@@ -23,7 +23,7 @@ export function initHighlights() {
   const container = document.getElementById("highlights-container");
   const loading = document.getElementById("highlights-loading");
 
-  // SUBMIT LINK HIGHLIGHT
+  // CREATE LINK HIGHLIGHT
   postBtn.addEventListener("click", async () => {
     const videoUrl = urlInput.value.trim();
     const title = titleInput.value.trim();
@@ -40,14 +40,14 @@ export function initHighlights() {
       userId: state.currentUserId,
       videoUrl,
       title,
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
 
     urlInput.value = "";
     titleInput.value = "";
   });
 
-  // REALTIME HIGHLIGHTS
+  // REALTIME HIGHLIGHT LOADING
   const q = query(
     collection(db, "football_highlights"),
     orderBy("timestamp", "desc")
@@ -64,9 +64,9 @@ export function initHighlights() {
   });
 }
 
-/* -----------------------------
-   RENDER SINGLE HIGHLIGHT
------------------------------- */
+/* -----------------------------------
+   RENDER ONE HIGHLIGHT
+------------------------------------ */
 function renderHighlight(item) {
   const wrapper = document.createElement("div");
   wrapper.className =
@@ -86,15 +86,16 @@ function renderHighlight(item) {
   return wrapper;
 }
 
-/* -----------------------------
-   AUTO-DETECT PLATFORM
------------------------------- */
+/* -----------------------------------
+   AUTO-DETECT VIDEO TYPE
+------------------------------------ */
 function getEmbed(url) {
   // YOUTUBE
   if (url.includes("youtube.com") || url.includes("youtu.be")) {
     const id =
       url.split("v=")[1]?.split("&")[0] ||
       url.split("/").pop();
+
     return `
       <iframe
         class="w-full h-full"
@@ -129,14 +130,14 @@ function getEmbed(url) {
     `;
   }
 
-  // DIRECT MP4 LINK
+  // DIRECT MP4
   if (url.endsWith(".mp4")) {
     return `
       <video class="w-full h-full" controls src="${url}"></video>
     `;
   }
 
-  // UNKNOWN VIDEO → fallback link
+  // fallback
   return `
     <div class="p-4 text-center">
       <a href="${url}" target="_blank" class="text-secondary underline">
@@ -146,10 +147,9 @@ function getEmbed(url) {
   `;
 }
 
-/* -----------------------------
-   LOAD USER HIGHLIGHTS 
-   (REQUIRED BY profile.js)
------------------------------- */
+/* -----------------------------------
+   LOAD USER HIGHLIGHTS (profile modal)
+------------------------------------ */
 export async function loadUserHighlights(userId) {
   const q = query(
     collection(db, "football_highlights"),
