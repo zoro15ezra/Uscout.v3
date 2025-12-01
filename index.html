@@ -270,89 +270,26 @@
 
       <!-- FEED -->
       <section id="feed-view" class="view-container hidden">
-        <div class="flex flex-col md:flex-row gap-4 md:gap-6">
 
-          <!-- SIDEBAR PROFILE -->
-          <aside class="hidden md:block md:w-1/3 lg:w-1/4">
-            <div
-              id="user-info-card"
-              class="bg-slate-900 p-4 rounded-xl shadow-lg border border-slate-700 sticky top-28 space-y-3"
-            >
-              <h3 class="text-sm font-bold text-slate-50 flex items-center gap-2">
-                <i class="fa-solid fa-user-check text-secondary"></i> My Profile
-              </h3>
+        <!-- GLASSY FLOATING MY PROFILE BUTTON -->
+        <button
+          id="floating-profile-btn"
+          class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 
+                 w-14 h-14 sm:w-16 sm:h-16 rounded-full
+                 backdrop-blur-xl bg-white/10 
+                 border border-white/20 shadow-xl 
+                 flex items-center justify-center
+                 hover:scale-110 transition-all duration-300 
+                 hover:bg-white/20 hover:border-white/30
+                 active:scale-95"
+        >
+          <i class="fa-solid fa-user text-white text-xl drop-shadow-lg"></i>
+        </button>
 
-              <div class="space-y-2 text-xs">
-                <div>
-                  <p class="text-[11px] text-slate-400">Player Name</p>
-                  <p id="profile-name-display" class="font-semibold text-slate-50 truncate">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Position</p>
-                  <p id="profile-position-display" class="text-slate-100 font-medium">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Club / Location</p>
-                  <p id="profile-club-display" class="text-slate-100">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Email</p>
-                  <p id="profile-email-display" class="text-slate-100 break-words">
-                    ...
-                  </p>
-                </div>
-                <div>
-                  <p class="text-[11px] text-slate-400">Phone</p>
-                  <p id="profile-phone-display" class="text-slate-100">
-                    Not set
-                  </p>
-                </div>
-              </div>
+        <div class="flex flex-col gap-4 md:gap-6">
 
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">Social</p>
-                <div class="flex flex-wrap gap-1 text-[11px]">
-                  <span id="profile-instagram-display" class="px-2 py-1 rounded-full bg-pink-500/20 text-pink-300 hidden"></span>
-                  <span id="profile-twitter-display" class="px-2 py-1 rounded-full bg-sky-500/20 text-sky-300 hidden"></span>
-                  <span id="profile-tiktok-display" class="px-2 py-1 rounded-full bg-slate-50/10 text-slate-100 hidden"></span>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">Network</p>
-                <div class="flex gap-4 text-[11px]">
-                  <button id="followers-btn" class="hover:text-secondary">
-                    <span id="followers-count" class="font-bold">0</span>
-                    <span class="text-slate-300"> Followers</span>
-                  </button>
-                  <button id="following-btn" class="hover:text-secondary">
-                    <span id="following-count" class="font-bold">0</span>
-                    <span class="text-slate-300"> Following</span>
-                  </button>
-                </div>
-              </div>
-
-              <div class="pt-2 border-t border-slate-700 mt-2">
-                <p class="text-[11px] text-slate-400 mb-1">User ID</p>
-                <code
-                  id="user-id-display"
-                  class="text-[10px] break-all bg-slate-800 p-1.5 rounded font-mono text-secondary cursor-pointer"
-                  title="Click to copy"
-                >
-                  Loading...
-                </code>
-              </div>
-            </div>
-          </aside>
-
-          <!-- MAIN FEED -->
-          <section class="w-full md:w-2/3 lg:w-3/4 space-y-4">
+          <!-- MAIN FEED ONLY (sidebar removed) -->
+          <section class="w-full space-y-4">
             <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg border border-slate-700">
               <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
                 <i class="fa-solid fa-pen-nib"></i> Share Your Update
@@ -918,8 +855,8 @@
   <!-- Firebase & App Scripts -->
   <script type="module" src="./js/app.js"></script>
   <script>
-  // Service worker for messaging disabled for demo
-  console.log("SW disabled");
+    // Service worker for messaging disabled for demo
+    console.log("SW disabled");
   </script>
 
 </body>
