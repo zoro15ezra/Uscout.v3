@@ -47,7 +47,7 @@ function setupViewSwitching() {
 
   window.__switchView = switchView;
 
-  // default
+  // default view
   switchView("home");
 }
 
