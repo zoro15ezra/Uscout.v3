@@ -4,6 +4,16 @@ import {
   addDoc,
   query,
   orderBy,
+  onSnapshot,
+  getDocs,
+  where
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import {
+  collection,
+  addDoc,
+  query,
+  orderBy,
   onSnapshot
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -139,4 +149,16 @@ function getEmbed(url) {
       </a>
     </div>
   `;
+}
+// PROFILE HIGHLIGHTS LOADING (USED IN public profile modal)
+export async function loadUserHighlights(userId) {
+  const q = await getDocs(
+    query(
+      collection(db, "football_highlights"),
+      where("userId", "==", userId),
+      orderBy("timestamp", "desc")
+    )
+  );
+
+  return q.docs.map((d) => d.data());
 }
