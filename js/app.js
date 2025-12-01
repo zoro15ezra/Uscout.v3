@@ -59,12 +59,10 @@ function refreshUserUI() {
   refreshProfileSidebar();
 }
 
-function onUserCleared() {
-  // Optional: clear local UI
-}
+function onUserCleared() {}
 
 document.addEventListener("DOMContentLoaded", () => {
-  // Init feature modules
+  // Initialize modules
   initProfile();
   initFeed();
   initHighlights();
@@ -72,25 +70,25 @@ document.addEventListener("DOMContentLoaded", () => {
   initChat();
   setupViewSwitching();
 
-  // Glassy floating "My Profile" button behaviour
+  // Floating Glassy Button
   const floatingBtn = document.getElementById("floating-profile-btn");
   if (floatingBtn) {
     floatingBtn.addEventListener("click", () => {
-      // small haptic if available
-      if (navigator.vibrate) {
-        try {
-          navigator.vibrate([10]);
-        } catch (e) {
-          // ignore vibration errors
-        }
-      }
-
-      if (!state.currentUserId) return;
-      viewUserProfile(state.currentUserId);
+      if (navigator.vibrate) navigator.vibrate([10]);
+      if (state.currentUserId) viewUserProfile(state.currentUserId);
     });
   }
 
-  // Auth bootstrap
+  // Collapsed Sidebar Button
+  const sidebarProfileBtn = document.getElementById("sidebar-profile-btn");
+  if (sidebarProfileBtn) {
+    sidebarProfileBtn.addEventListener("click", () => {
+      if (navigator.vibrate) navigator.vibrate([10]);
+      if (state.currentUserId) viewUserProfile(state.currentUserId);
+    });
+  }
+
+  // Auth
   initAuth({
     onUserReady: () => {
       const greeting = document.getElementById("user-greeting");
@@ -98,9 +96,9 @@ document.addEventListener("DOMContentLoaded", () => {
         greeting.textContent = `Welcome, ${state.currentUserProfile.name}`;
         greeting.classList.remove("hidden");
       }
-      // Initialize push notifications after login
       initNotifications();
     },
+
     onUserCleared,
     refreshUserUI,
     startRealtime,
