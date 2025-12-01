@@ -1,193 +1,142 @@
-
-// js/highlights.js
-import { db, storage, COLLECTIONS, state } from "./firebase.js";
+// highlights.js
 import {
   collection,
   addDoc,
-  serverTimestamp,
   query,
-  where,
   orderBy,
-  onSnapshot,
-  getDocs,
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js";
-import {
-  ref as storageRef,
-  uploadBytesResumable,
-  getDownloadURL,
-} from "https://www.gstatic.com/firebasejs/11.1.0/firebase-storage.js";
-import { escapeHtml } from "./utils.js";
+  onSnapshot
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+import { db, state } from "./firebase.js";
 
 export function initHighlights() {
-  const fileInput = document.getElementById("highlight-file");
-  const fileLabel = document.getElementById("file-upload-label");
-  const urlInput = document.getElementById("highlight-url");
-  const postBtn = document.getElementById("highlight-post-button");
-
-  fileInput?.addEventListener("change", (e) => {
-    if (e.target.files.length > 0) {
-      fileLabel.textContent = `Selected: ${e.target.files[0].name}`;
-      urlInput.value = "";
-      document.getElementById("highlight-error").classList.add("hidden");
-    } else {
-      fileLabel.textContent = "Select a video file";
-    }
-  });
-
-  urlInput?.addEventListener("input", () => {
-    if (urlInput.value.trim().length > 0) {
-      fileInput.value = "";
-      fileLabel.textContent = "Select a video file";
-      document.getElementById("highlight-error").classList.add("hidden");
-    }
-  });
-
-  postBtn?.addEventListener("click", handleHighlightPost);
-  listenToHighlights();
-}
-
-async function handleHighlightPost() {
-  if (!state.currentUserId) {
-    alert("Please wait for authentication...");
-    return;
-  }
-
-  const fileInput = document.getElementById("highlight-file");
   const urlInput = document.getElementById("highlight-url");
   const titleInput = document.getElementById("highlight-title");
-  const errorEl = document.getElementById("highlight-error");
-  const btn = document.getElementById("highlight-post-button");
+  const postBtn = document.getElementById("highlight-post-button");
+  const errorBox = document.getElementById("highlight-error");
+  const container = document.getElementById("highlights-container");
+  const loading = document.getElementById("highlights-loading");
 
-  const file = fileInput.files[0];
-  const url = urlInput.value.trim();
-  const title = titleInput.value.trim() || "My Highlight";
+  // CREATE HIGHLIGHT — LINK ONLY
+  postBtn.addEventListener("click", async () => {
+    const videoUrl = urlInput.value.trim();
+    const title = titleInput.value.trim();
 
-  if (!file && !url) {
-    errorEl.classList.remove("hidden");
-    return;
-  }
-
-  errorEl.classList.add("hidden");
-  btn.disabled = true;
-  btn.textContent = "Processing...";
-
-  let videoUrl = url;
-
-  try {
-    if (file) {
-      const ext = file.name.split(".").pop();
-      const fileName = `${Date.now()}_${title.replace(/\s/g, "_")}.${ext}`;
-      const path = `highlights/${state.currentUserId}/${fileName}`;
-      const ref = storageRef(storage, path);
-
-      const uploadTask = uploadBytesResumable(ref, file);
-      await new Promise((resolve, reject) => {
-        uploadTask.on(
-          "state_changed",
-          (snap) => {
-            const progress =
-              (snap.bytesTransferred / snap.totalBytes) * 100;
-            btn.textContent = `Uploading... ${Math.round(progress)}%`;
-          },
-          (err) => reject(err),
-          async () => {
-            videoUrl = await getDownloadURL(uploadTask.snapshot.ref);
-            resolve();
-          }
-        );
-      });
+    if (!videoUrl) {
+      errorBox.textContent = "Please paste a valid video link.";
+      errorBox.classList.remove("hidden");
+      return;
     }
 
-    const p = state.currentUserProfile || {};
-    await addDoc(collection(db, COLLECTIONS.HIGHLIGHTS), {
+    errorBox.classList.add("hidden");
+
+    await addDoc(collection(db, "football_highlights"), {
       userId: state.currentUserId,
-      username: p.name || "Player",
-      title,
       videoUrl,
-      timestamp: serverTimestamp(),
+      title,
+      timestamp: Date.now()
     });
 
-    fileInput.value = "";
     urlInput.value = "";
     titleInput.value = "";
-    document.getElementById("file-upload-label").textContent =
-      "Select a video file";
-    btn.textContent = "Share Highlight";
-    btn.disabled = false;
-
-    alert("Highlight shared successfully!");
-  } catch (err) {
-    console.error("Highlight error", err);
-    alert("Failed to upload highlight. Check Storage Rules. " + err.message);
-    btn.textContent = "Share Highlight";
-    btn.disabled = false;
-  }
-}
-
-function listenToHighlights() {
-  const loadingEl = document.getElementById("highlights-loading");
-  try {
-    const q = query(
-      collection(db, COLLECTIONS.HIGHLIGHTS),
-      orderBy("timestamp", "desc")
-    );
-    onSnapshot(
-      q,
-      (snap) => {
-        const arr = [];
-        snap.forEach((d) => arr.push({ id: d.id, ...d.data() }));
-        renderHighlights(arr);
-        if (loadingEl) loadingEl.style.display = "none";
-      },
-      (err) => console.error("Highlights listener error", err)
-    );
-  } catch (e) {
-    console.error(e);
-  }
-}
-
-function renderHighlights(highlights) {
-  const container = document.getElementById("highlights-container");
-  if (!container) return;
-  container.innerHTML = "";
-
-  if (!highlights.length) {
-    container.innerHTML =
-      '<div class="col-span-full text-center p-8 text-slate-400 text-xs"><i class="fa-regular fa-circle-play text-xl mb-2"></i><p>No highlights yet. Upload yours!</p></div>';
-    return;
-  }
-
-  highlights.forEach((h) => {
-    const a = document.createElement("a");
-    a.href = h.videoUrl || "#";
-    a.target = "_blank";
-    a.className =
-      "aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg flex flex-col items-center justify-center p-3 text-white relative overflow-hidden group";
-    a.innerHTML = `
-      <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition"></div>
-      <i class="fa-solid fa-play-circle text-2xl mb-1 relative z-10"></i>
-      <p class="text-[11px] font-semibold text-center relative z-10">${escapeHtml(
-        h.title || "Highlight"
-      )}</p>
-      <p class="text-[10px] text-slate-300 mt-0.5 relative z-10">${escapeHtml(
-        h.username || "Player"
-      )}</p>
-    `;
-    container.appendChild(a);
   });
-}
 
-export async function loadUserHighlights(userId) {
+  // LOAD HIGHLIGHTS LIVE
   const q = query(
-    collection(db, COLLECTIONS.HIGHLIGHTS),
-    where("userId", "==", userId),
+    collection(db, "football_highlights"),
     orderBy("timestamp", "desc")
   );
-  const snap = await getDocs(q);
-  const arr = [];
-  snap.forEach((d) => {
-    const data = d.data();
-    arr.push({ id: d.id, ...data });
+
+  onSnapshot(q, (snapshot) => {
+    container.innerHTML = "";
+    loading.classList.add("hidden");
+
+    snapshot.forEach((doc) => {
+      const item = doc.data();
+      container.appendChild(renderHighlight(item));
+    });
   });
-  return arr;
+}
+
+// RENDER SINGLE HIGHLIGHT
+function renderHighlight(item) {
+  const wrapper = document.createElement("div");
+  wrapper.className =
+    "bg-slate-900 rounded-xl overflow-hidden shadow-lg border border-slate-700";
+
+  const embedHtml = getEmbed(item.videoUrl);
+
+  wrapper.innerHTML = `
+    <div class="aspect-video bg-black overflow-hidden">
+      ${embedHtml}
+    </div>
+    <div class="p-2 text-xs sm:text-sm text-slate-200">
+      ${item.title || "Highlight"}
+    </div>
+  `;
+
+  return wrapper;
+}
+
+// AUTO-DETECT PLATFORM
+function getEmbed(url) {
+  // YOUTUBE
+  if (url.includes("youtube.com") || url.includes("youtu.be")) {
+    const id =
+      url.split("v=")[1]?.split("&")[0] ||
+      url.split("/").pop();
+    return `
+      <iframe
+        class="w-full h-full"
+        src="https://www.youtube.com/embed/${id}"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    `;
+  }
+
+  // TIKTOK
+  if (url.includes("tiktok.com")) {
+    return `
+      <blockquote class="tiktok-embed" cite="${url}" data-video-url="${url}">
+          <a href="${url}"></a>
+      </blockquote>
+      <script async src="https://www.tiktok.com/embed.js"></script>
+    `;
+  }
+
+  // VIMEO
+  if (url.includes("vimeo.com")) {
+    const id = url.split("/").pop();
+    return `
+      <iframe
+        src="https://player.vimeo.com/video/${id}"
+        class="w-full h-full"
+        frameborder="0"
+        allow="autoplay; fullscreen; picture-in-picture"
+        allowfullscreen
+      ></iframe>
+    `;
+  }
+
+  // DIRECT MP4 LINK
+  if (url.endsWith(".mp4")) {
+    return `
+      <video
+        class="w-full h-full"
+        controls
+        src="${url}"
+      ></video>
+    `;
+  }
+
+  // FALLBACK (unknown link)
+  return `
+    <div class="p-4 text-center">
+      <a href="${url}" target="_blank" class="text-secondary underline">
+        Open Video
+      </a>
+    </div>
+  `;
 }
