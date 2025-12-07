@@ -46,7 +46,11 @@ export function initProfile() {
   }
 
   openProfileBtn?.addEventListener("click", openProfileModal);
-  floatingProfileBtn?.addEventListener("click", openProfileModal);
+floatingProfileBtn?.addEventListener("click", () => {
+  if (state.currentUserId) {
+    viewUserProfile(state.currentUserId);
+  }
+});
   sidebarProfileBtn?.addEventListener("click", openProfileModal);
 
   profileCancelBtn?.addEventListener("click", () =>
