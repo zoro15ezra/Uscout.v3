@@ -273,12 +273,19 @@
       <section id="feed-view" class="view-container hidden">
 
         <!-- FLOATING GLASSY MY PROFILE BUTTON -->
-      <button id="feed-profile-btn"
-        class="flex items-center gap-2 bg-slate-800 hover:bg-slate-700 text-white px-4 py-2 rounded-lg transition">
-    <i data-lucide="user"></i>
-    <span>Profile</span>
-</button>
-
+        <button
+          id="floating-profile-btn"
+          class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 
+                 w-14 h-14 sm:w-16 sm:h-16 rounded-full
+                 backdrop-blur-xl bg-white/10 
+                 border border-white/20 shadow-xl 
+                 flex items-center justify-center
+                 hover:scale-110 transition-all duration-300 
+                 hover:bg-white/20 hover:border-white/30
+                 active:scale-95"
+        >
+          <i class="fa-solid fa-user text-white text-xl drop-shadow-lg"></i>
+        </button>
 
         <div class="flex flex-col md:flex-row gap-4 md:gap-6">
 
@@ -560,7 +567,7 @@
   <!-- PROFILE EDIT MODAL -->
   <div
     id="profile-modal"
-    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4"
   >
     <div
       class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto max-h-[90vh] border border-slate-700"
@@ -667,7 +674,7 @@
   <!-- FOLLOWERS MODAL -->
   <div
     id="followers-modal"
-    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4"
   >
     <div
       class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] overflow-y-auto border border-slate-700"
@@ -685,7 +692,7 @@
   <!-- FOLLOWING MODAL -->
   <div
     id="following-modal"
-    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4"
   >
     <div
       class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] overflow-y-auto border border-slate-700"
@@ -703,7 +710,7 @@
   <!-- USER PUBLIC PROFILE MODAL -->
   <div
     id="user-profile-modal"
-    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
+    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden flex items-center justify-center p-4"
   >
     <div
       class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-4xl my-6 max-h-[90vh] overflow-y-auto border border-slate-700"
