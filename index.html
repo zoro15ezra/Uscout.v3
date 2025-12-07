@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>U.Scout - The Footballer Network</title>
 
+  <!-- Tailwind -->
   <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
   <script>
     tailwind.config = {
@@ -20,14 +21,17 @@
     };
   </script>
 
-  <link rel="stylesheet" href="./css/styles.css" />
+  <!-- Styles + Icons -->
+  <link rel="stylesheet" href="./css/styles.css">
   <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 
 <body class="min-h-screen bg-slate-950 text-slate-50">
 
+<!-- ========================================================= -->
 <!-- AUTH SCREEN -->
+<!-- ========================================================= -->
 <div id="auth-screen"
   class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
 
@@ -48,13 +52,13 @@
         <div>
           <label class="text-sm">Email</label>
           <input id="login-email" type="email" required
-            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg" />
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
         </div>
 
         <div>
           <label class="text-sm">Password</label>
           <input id="login-password" type="password" required
-            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg" />
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
         </div>
 
         <button type="submit"
@@ -78,24 +82,25 @@
         <div>
           <label class="text-sm">Player Name</label>
           <input id="register-name" type="text" required
-            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg" />
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
         </div>
 
         <div>
           <label class="text-sm">Email</label>
           <input id="register-email" type="email" required
-            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg" />
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
         </div>
 
         <div>
           <label class="text-sm">Password</label>
           <input id="register-password" type="password" minlength="6" required
-            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg" />
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
         </div>
 
         <div>
           <label class="text-sm">Position</label>
-          <select id="register-position" class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
+          <select id="register-position"
+            class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg">
             <option value="">Select Position</option>
             <option>Goalkeeper</option>
             <option>Defender</option>
@@ -119,8 +124,12 @@
   </div>
 </div>
 
+<!-- ========================================================= -->
 <!-- MAIN APP -->
+<!-- ========================================================= -->
 <div id="app" class="hidden flex flex-col min-h-screen">
+
+  <!-- HEADER -->
   <header class="bg-slate-950 border-b border-slate-800 sticky top-0 z-30">
     <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
       <div class="flex items-center gap-2">
@@ -144,213 +153,233 @@
     </div>
   </header>
 
-<!-- NAV -->
-<nav class="hidden sm:flex max-w-7xl mx-auto px-4 py-2 border-b border-slate-800">
-  <button class="view-btn flex-1 text-secondary" data-view="home">
-    <i class="fa-solid fa-house mr-2"></i> Home
-  </button>
-  <button class="view-btn flex-1 text-slate-400" data-view="feed">
-    <i class="fa-solid fa-bars-staggered mr-2"></i> Feed
-  </button>
-  <button class="view-btn flex-1 text-slate-400" data-view="discover">
-    <i class="fa-solid fa-users mr-2"></i> Discover
-  </button>
-  <button class="view-btn flex-1 text-slate-400" data-view="highlights">
-    <i class="fa-solid fa-film mr-2"></i> Highlights
-  </button>
-  <button class="view-btn flex-1 text-slate-400" data-view="chat">
-    <i class="fa-solid fa-comments mr-2"></i> Chat
-  </button>
-</nav>
-<!-- MAIN CONTENT -->
-<main class="max-w-7xl mx-auto flex-grow px-4 py-4 w-full">
-
-  <!-- HOME VIEW -->
-  <section id="home-view" class="view-container flex items-center justify-center min-h-[70vh]">
-    <div class="text-center bg-slate-900/80 p-10 rounded-xl border border-secondary/30 shadow-xl">
-      <h1 class="text-4xl font-extrabold mb-4">
-        <span class="text-secondary">U.Scout</span> connects players & scouts worldwide.
-      </h1>
-      <p class="text-slate-300 text-sm mb-6">
-        Build your football profile, showcase highlights, and grow your network.
-      </p>
-      <button class="go-feed-btn bg-secondary text-slate-900 font-bold py-3 px-7 rounded-full">
-        <i class="fa-solid fa-arrow-right mr-2"></i> Explore Feed
-      </button>
-    </div>
-  </section>
-
-  <!-- FEED VIEW -->
-  <section id="feed-view" class="view-container hidden">
-
-    <!-- FLOATING GLOWING PROFILE BUTTON -->
-    <button id="floating-profile-btn"
-      class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full 
-             backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl 
-             flex items-center justify-center hover:scale-110 transition-all duration-300">
-      <i class="fa-solid fa-user text-white text-xl"></i>
+  <!-- DESKTOP NAV -->
+  <nav class="hidden sm:flex max-w-7xl mx-auto px-4 py-2 border-b border-slate-800">
+    <button class="view-btn flex-1 text-secondary" data-view="home">
+      <i class="fa-solid fa-house mr-2"></i> Home
     </button>
+    <button class="view-btn flex-1 text-slate-400" data-view="feed">
+      <i class="fa-solid fa-bars-staggered mr-2"></i> Feed
+    </button>
+    <button class="view-btn flex-1 text-slate-400" data-view="discover">
+      <i class="fa-solid fa-users mr-2"></i> Discover
+    </button>
+    <button class="view-btn flex-1 text-slate-400" data-view="highlights">
+      <i class="fa-solid fa-film mr-2"></i> Highlights
+    </button>
+    <button class="view-btn flex-1 text-slate-400" data-view="chat">
+      <i class="fa-solid fa-comments mr-2"></i> Chat
+    </button>
+  </nav>
 
-    <div class="flex flex-col md:flex-row gap-6">
-      <div class="hidden md:flex md:w-1/3 lg:w-1/4">
-        <button id="sidebar-profile-btn"
-          class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 rounded-xl 
-                 border border-slate-700 hover:bg-slate-800 flex items-center justify-center gap-2">
-          <i class="fa-solid fa-user text-secondary"></i> My Profile
+  <!-- ========================================================= -->
+  <!-- MAIN CONTENT -->
+  <!-- ========================================================= -->
+  <main class="max-w-7xl mx-auto flex-grow px-4 py-4 w-full">
+
+    <!-- HOME VIEW -->
+    <section id="home-view" class="view-container flex items-center justify-center min-h-[70vh]">
+      <div class="text-center bg-slate-900/80 p-10 rounded-xl border border-secondary/30 shadow-xl">
+        <h1 class="text-4xl font-extrabold mb-4">
+          <span class="text-secondary">U.Scout</span> connects players & scouts worldwide.
+        </h1>
+        <p class="text-slate-300 text-sm mb-6">
+          Build your football profile, showcase highlights, and grow your network.
+        </p>
+        <button class="go-feed-btn bg-secondary text-slate-900 font-bold py-3 px-7 rounded-full">
+          <i class="fa-solid fa-arrow-right mr-2"></i> Explore Feed
         </button>
       </div>
+    </section>
 
-      <section class="flex-grow space-y-4">
-        <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-lg">
-          <h2 class="text-secondary text-sm font-bold mb-3">
-            <i class="fa-solid fa-pen-nib mr-2"></i> Share an Update
-          </h2>
-          <textarea id="post-content" rows="3"
-            class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-                   focus:ring-2 focus:ring-secondary resize-none text-slate-50 text-sm"
-            placeholder="What's happening on or off the pitch?"></textarea>
+    <!-- FEED VIEW -->
+    <section id="feed-view" class="view-container hidden">
 
-          <div class="flex justify-end mt-2">
-            <button id="post-button"
-              class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
-                     shadow-md hover:bg-emerald-500 text-sm" disabled>
-              Post Update
-            </button>
+      <!-- FLOATING GLOWING PROFILE BUTTON -->
+      <button id="floating-profile-btn"
+        class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 w-14 h-14 sm:w-16 sm:h-16 rounded-full 
+               backdrop-blur-xl bg-white/10 border border-white/20 shadow-2xl 
+               flex items-center justify-center hover:scale-110 transition-all duration-300">
+        <i class="fa-solid fa-user text-white text-xl"></i>
+      </button>
+
+      <div class="flex flex-col md:flex-row gap-6">
+
+        <div class="hidden md:flex md:w-1/3 lg:w-1/4">
+          <button id="sidebar-profile-btn"
+            class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 rounded-xl 
+                   border border-slate-700 hover:bg-slate-800 flex items-center justify-center gap-2">
+            <i class="fa-solid fa-user text-secondary"></i> My Profile
+          </button>
+        </div>
+
+        <section class="flex-grow space-y-4">
+          <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 shadow-lg">
+            <h2 class="text-secondary text-sm font-bold mb-3">
+              <i class="fa-solid fa-pen-nib mr-2"></i> Share an Update
+            </h2>
+            <textarea id="post-content" rows="3"
+              class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary resize-none text-slate-50 text-sm"
+              placeholder="What's happening on or off the pitch?"></textarea>
+
+            <div class="flex justify-end mt-2">
+              <button id="post-button"
+                class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
+                       shadow-md hover:bg-emerald-500 text-sm" disabled>
+                Post Update
+              </button>
+            </div>
           </div>
-        </div>
 
-        <div id="loading-indicator" class="text-center text-slate-400 p-8 text-sm">
-          <div class="animate-spin w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mx-auto mb-3"></div>
-          Loading feed...
-        </div>
+          <div id="loading-indicator" class="text-center text-slate-400 p-8 text-sm">
+            <div class="animate-spin w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mx-auto mb-3"></div>
+            Loading feed...
+          </div>
 
-        <div id="feed-container" class="space-y-4"></div>
-      </section>
-    </div>
-  </section>
+          <div id="feed-container" class="space-y-4"></div>
+        </section>
 
-  <!-- DISCOVER VIEW -->
-  <section id="discover-view" class="view-container hidden">
-    <h1 class="text-2xl font-extrabold mb-3 text-slate-50 border-b border-slate-800 pb-2">Discover Players</h1>
-    <p class="text-slate-400 text-sm mb-4">Search and connect with players worldwide.</p>
+      </div>
+    </section>
 
-    <div class="max-w-sm mb-6">
-      <label class="text-[11px] font-medium text-slate-300">Search players</label>
-      <input id="discover-search" type="text"
-        class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary text-sm"
-        placeholder="Search by name, position, club..." />
-    </div>
+    <!-- DISCOVER VIEW -->
+    <section id="discover-view" class="view-container hidden">
+      <h1 class="text-2xl font-extrabold mb-3 text-slate-50 border-b border-slate-800 pb-2">
+        Discover Players
+      </h1>
+      <p class="text-slate-400 text-sm mb-4">
+        Search and connect with players worldwide.
+      </p>
 
-    <div id="discover-loading" class="text-center p-8 text-slate-400 text-sm">
-      <div class="animate-spin w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mx-auto mb-3"></div>
-      Loading players...
-    </div>
-
-    <div id="discover-container"
-      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-    </div>
-  </section>
-
-  <!-- HIGHLIGHTS VIEW -->
-  <section id="highlights-view" class="view-container hidden">
-    <h1 class="text-2xl font-extrabold mb-3 text-slate-50 border-b border-slate-800 pb-2">Highlights</h1>
-    <p class="text-slate-400 text-sm mb-4">Paste video links to showcase your talent.</p>
-
-    <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 mb-6 shadow-lg">
-      <h2 class="text-secondary text-sm font-bold mb-3">
-        <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Share Your Highlight
-      </h2>
-
-      <input id="highlight-url" type="url"
-        class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg mb-3 text-sm"
-        placeholder="Paste a YouTube / TikTok / Vimeo link..." />
-
-      <input id="highlight-title" type="text"
-        class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg text-sm"
-        placeholder="Give your highlight a title..." />
-
-      <div class="flex justify-end mt-2">
-        <button id="highlight-post-button"
-          class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full hover:bg-emerald-500 text-sm">
-          Share Highlight
-        </button>
+      <div class="max-w-sm mb-6">
+        <label class="text-[11px] font-medium text-slate-300">Search players</label>
+        <input id="discover-search" type="text"
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary text-sm"
+          placeholder="Search by name, position, club...">
       </div>
 
-      <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden"></p>
-    </div>
-
-    <div id="highlights-container"
-      class="grid grid-cols-2 md:grid-cols-3 gap-4">
-      <div id="highlights-loading"
-        class="col-span-full text-center p-8 text-slate-400 text-sm">
+      <div id="discover-loading" class="text-center p-8 text-slate-400 text-sm">
         <div class="animate-spin w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mx-auto mb-3"></div>
-        Loading highlights...
+        Loading players...
       </div>
-    </div>
-  </section>
 
-  <!-- CHAT VIEW -->
-  <section id="chat-view" class="view-container hidden">
-    <div class="flex flex-col md:flex-row h-[70vh] bg-slate-900 border border-slate-700 rounded-xl shadow-xl overflow-hidden">
+      <div id="discover-container"
+        class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4"></div>
+    </section>
 
-      <!-- CHAT LIST -->
-      <div id="chat-list"
-        class="md:w-1/3 p-4 border-b md:border-b-0 md:border-r border-slate-800 overflow-y-auto">
-        <h2 class="text-secondary text-sm font-bold mb-2">
-          <i class="fa-solid fa-comments mr-2"></i> Messages
+    <!-- HIGHLIGHTS VIEW -->
+    <section id="highlights-view" class="view-container hidden">
+      <h1 class="text-2xl font-extrabold mb-3 text-slate-50 border-b border-slate-800 pb-2">
+        Highlights
+      </h1>
+      <p class="text-slate-400 text-sm mb-4">
+        Paste video links to showcase your talent.
+      </p>
+
+      <div class="bg-slate-900 p-5 rounded-xl border border-slate-700 mb-6 shadow-lg">
+        <h2 class="text-secondary text-sm font-bold mb-3">
+          <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Share Your Highlight
         </h2>
 
-        <button data-chat-id="global_team_chat"
-          class="chat-room-btn w-full bg-slate-950 p-3 rounded-lg border border-slate-700 hover:bg-slate-800 mb-4">
-          <p class="font-semibold text-secondary">
-            <i class="fa-solid fa-earth-europe mr-2"></i> Global Team Chat
-          </p>
-          <p class="text-slate-400 text-xs">Worldwide football chat</p>
-        </button>
+        <input id="highlight-url" type="url"
+          class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg mb-3 text-sm"
+          placeholder="Paste a YouTube / TikTok / Vimeo link...">
 
-        <p class="text-[11px] text-slate-400">Direct Messages</p>
-        <div id="dm-list" class="space-y-2 text-sm text-slate-300">
-          <p class="text-[11px] text-slate-500">No chats yet.</p>
+        <input id="highlight-title" type="text"
+          class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg text-sm"
+          placeholder="Give your highlight a title...">
+
+        <div class="flex justify-end mt-2">
+          <button id="highlight-post-button"
+            class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full hover:bg-emerald-500 text-sm">
+            Share Highlight
+          </button>
         </div>
+
+        <p id="highlight-error" class="text-xs text-red-300 mt-2 hidden"></p>
       </div>
 
-      <!-- CHAT ROOM -->
-      <div id="chat-room-container" class="md:w-2/3 flex flex-col">
-        <div id="chat-room-header"
-          class="p-4 border-b border-slate-800 bg-slate-950">
-          <h3 id="chat-room-title" class="text-sm font-bold">Select a chat</h3>
-          <p id="chat-room-subtitle" class="text-[11px] text-slate-400">
-            Choose a conversation or open a profile to start a DM.
-          </p>
+      <div id="highlights-container"
+        class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        <div id="highlights-loading"
+          class="col-span-full text-center p-8 text-slate-400 text-sm">
+          <div class="animate-spin w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mx-auto mb-3"></div>
+          Loading highlights...
         </div>
+      </div>
+    </section>
 
-        <div id="messages-container"
-          class="flex-grow p-4 overflow-y-auto text-sm bg-slate-950 space-y-2">
-          <div id="chat-placeholder"
-            class="text-center text-slate-500 mt-16">
-            <i class="fa-solid fa-star text-secondary mb-2"></i>
-            <p>Select a chat on the left to begin.</p>
+    <!-- CHAT VIEW -->
+    <section id="chat-view" class="view-container hidden">
+      <div class="flex flex-col md:flex-row h-[70vh] bg-slate-900 border border-slate-700 rounded-xl shadow-xl overflow-hidden">
+
+        <!-- CHAT LIST -->
+        <div id="chat-list"
+          class="md:w-1/3 p-4 border-b md:border-b-0 md:border-r border-slate-800 overflow-y-auto">
+          <h2 class="text-secondary text-sm font-bold mb-2">
+            <i class="fa-solid fa-comments mr-2"></i> Messages
+          </h2>
+
+          <button data-chat-id="global_team_chat"
+            class="chat-room-btn w-full bg-slate-950 p-3 rounded-lg border border-slate-700 hover:bg-slate-800 mb-4">
+            <p class="font-semibold text-secondary">
+              <i class="fa-solid fa-earth-europe mr-2"></i> Global Team Chat
+            </p>
+            <p class="text-slate-400 text-xs">Worldwide football chat</p>
+          </button>
+
+          <p class="text-[11px] text-slate-400">Direct Messages</p>
+          <div id="dm-list" class="space-y-2 text-sm text-slate-300">
+            <p class="text-[11px] text-slate-500">No chats yet.</p>
           </div>
         </div>
 
-        <div id="chat-input-area"
-          class="p-4 border-t border-slate-800 bg-slate-950 hidden">
-          <div class="flex gap-2">
-            <input id="chat-message-input" type="text"
-              class="flex-grow p-3 bg-slate-900 border border-slate-700 rounded-full text-sm"
-              placeholder="Type a message..." />
-            <button id="send-chat-btn"
-              class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full hover:bg-emerald-500 text-sm">
-              Send
-            </button>
+        <!-- CHAT ROOM -->
+        <div id="chat-room-container" class="md:w-2/3 flex flex-col">
+
+          <div id="chat-room-header"
+            class="p-4 border-b border-slate-800 bg-slate-950">
+            <h3 id="chat-room-title" class="text-sm font-bold">Select a chat</h3>
+            <p id="chat-room-subtitle" class="text-[11px] text-slate-400">
+              Choose a conversation or open a profile to start a DM.
+            </p>
           </div>
+
+          <div id="messages-container"
+            class="flex-grow p-4 overflow-y-auto text-sm bg-slate-950 space-y-2">
+            <div id="chat-placeholder"
+              class="text-center text-slate-500 mt-16">
+              <i class="fa-solid fa-star text-secondary mb-2"></i>
+              <p>Select a chat on the left to begin.</p>
+            </div>
+          </div>
+
+          <div id="chat-input-area"
+            class="p-4 border-t border-slate-800 bg-slate-950 hidden">
+            <div class="flex gap-2">
+              <input id="chat-message-input" type="text"
+                class="flex-grow p-3 bg-slate-900 border border-slate-700 rounded-full text-sm"
+                placeholder="Type a message...">
+              <button id="send-chat-btn"
+                class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full hover:bg-emerald-500 text-sm">
+                Send
+              </button>
+            </div>
+          </div>
+
         </div>
       </div>
+    </section>
 
-    </div>
-  </section>
+  </main> <!-- END MAIN CONTENT -->
 
-</main>
+</div> <!-- END OF #APP -->
+
+<!-- ========================================================= -->
+<!-- USER PROFILE MODALS (PUBLIC + FOLLOWERS + FOLLOWING) -->
+<!-- ========================================================= -->
+
 <!-- FOLLOWERS MODAL -->
 <div id="followers-modal"
   class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
@@ -379,7 +408,7 @@
   </div>
 </div>
 
-<!-- PUBLIC USER PROFILE MODAL (FLOATING BUTTON OPENS THIS) -->
+<!-- PUBLIC PROFILE MODAL -->
 <div id="user-profile-modal"
   class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4">
 
@@ -473,7 +502,9 @@
   </div>
 </div>
 
-<!-- EDIT PROFILE MODAL (TOP-RIGHT BUTTON OPENS THIS — CORRECT COPY) -->
+<!-- ========================================================= -->
+<!-- EDIT PROFILE MODAL -->
+<!-- ========================================================= -->
 <div id="profile-modal"
   class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4">
 
@@ -487,7 +518,7 @@
       <div>
         <label class="text-xs text-slate-300 mb-1 block">Player Name</label>
         <input id="profile-name-input" type="text" required
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div>
@@ -505,36 +536,38 @@
       <div>
         <label class="text-xs text-slate-300 mb-1 block">Club / Country</label>
         <input id="profile-club-input" type="text"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div>
         <label class="text-xs text-slate-300 mb-1 block">Phone</label>
         <input id="profile-phone-input" type="text"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div>
         <label class="text-xs text-slate-300 mb-1 block">Instagram</label>
         <input id="profile-instagram-input" type="text"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div>
         <label class="text-xs text-slate-300 mb-1 block">Twitter / X</label>
         <input id="profile-twitter-input" type="text"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div>
         <label class="text-xs text-slate-300 mb-1 block">TikTok</label>
         <input id="profile-tiktok-input" type="text"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg" />
+          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg">
       </div>
 
       <div class="flex justify-end gap-2 pt-2">
         <button id="profile-cancel-btn" type="button"
-          class="bg-slate-800 text-white py-2 px-4 rounded-full text-xs">Cancel</button>
+          class="bg-slate-800 text-white py-2 px-4 rounded-full text-xs">
+          Cancel
+        </button>
 
         <button type="submit"
           class="bg-secondary text-slate-950 py-2 px-4 rounded-full text-xs font-semibold">
@@ -546,8 +579,11 @@
   </div>
 </div>
 
-  <!-- MOBILE NAV -->
-<footer class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40">
+<!-- ========================================================= -->
+<!-- MOBILE NAV (OUTSIDE #app — CORRECT PLACEMENT) -->
+<!-- ========================================================= -->
+<footer
+  class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40">
   <nav class="flex justify-around text-[11px]">
 
     <button data-view="home" class="view-btn flex flex-col items-center p-2 text-secondary active-nav">
@@ -578,42 +614,10 @@
   </nav>
 </footer>
 
-</div> <!-- END OF #app -->
-<!-- MOBILE NAV -->
-<footer class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40">
-  <nav class="flex justify-around text-[11px]">
-
-    <button data-view="home" class="view-btn flex flex-col items-center p-2 text-secondary active-nav">
-      <i class="fa-solid fa-house"></i>
-      <span class="mt-0.5 font-medium">Home</span>
-    </button>
-
-    <button data-view="feed" class="view-btn flex flex-col items-center p-2 text-slate-400">
-      <i class="fa-solid fa-bars-staggered"></i>
-      <span class="mt-0.5 font-medium">Feed</span>
-    </button>
-
-    <button data-view="discover" class="view-btn flex flex-col items-center p-2 text-slate-400">
-      <i class="fa-solid fa-users"></i>
-      <span class="mt-0.5 font-medium">Discover</span>
-    </button>
-
-    <button data-view="highlights" class="view-btn flex flex-col items-center p-2 text-slate-400">
-      <i class="fa-solid fa-film"></i>
-      <span class="mt-0.5 font-medium">Highlights</span>
-    </button>
-
-    <button data-view="chat" class="view-btn flex flex-col items-center p-2 text-slate-400">
-      <i class="fa-solid fa-comments"></i>
-      <span class="mt-0.5 font-medium">Chat</span>
-    </button>
-
-  </nav>
-</footer>
-
-<!-- MAIN APP SCRIPT -->
+<!-- ========================================================= -->
+<!-- MAIN SCRIPT -->
+<!-- ========================================================= -->
 <script type="module" src="./js/app.js"></script>
-
 <script>
   console.log("Service Worker disabled for demo");
 </script>
