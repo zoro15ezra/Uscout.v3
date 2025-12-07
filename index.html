@@ -268,15 +268,8 @@
         </div>
       </section>
 
-      
-<!-- FEED -->
+      <!-- FEED -->
       <section id="feed-view" class="view-container hidden">
-        <button
-  id="feed-profile-btn"
-  class="bg-slate-800 text-white px-4 py-2 rounded-lg hidden"
->
-  Profile
-</button>
 
         <!-- FLOATING GLASSY MY PROFILE BUTTON -->
         <button
@@ -349,7 +342,7 @@
         </div>
       </section>
 
-<!-- DISCOVER -->
+      <!-- DISCOVER -->
       <section id="discover-view" class="view-container hidden">
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
           Discover Players
@@ -384,7 +377,6 @@
         ></div>
       </section>
 
-      
       <!-- HIGHLIGHTS -->
       <section id="highlights-view" class="view-container hidden">
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
@@ -437,6 +429,7 @@
           </div>
         </div>
       </section>
+
       <!-- CHAT (WhatsApp-style with DM list + current chat) -->
       <section id="chat-view" class="view-container hidden">
         <div
@@ -571,115 +564,111 @@
   </div>
 
   <!-- PROFILE EDIT MODAL -->
-  
-<div
-  id="profile-modal"
-  class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
->
   <div
-    class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto max-h-[90vh] border border-slate-700"
+    id="profile-modal"
+    class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
   >
-    <h3 class="text-base sm:text-lg font-bold mb-4 text-secondary flex items-center gap-2">
-      <i class="fa-solid fa-id-card"></i> Edit Profile
-    </h3>
+    <div
+      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto max-h-[90vh] border border-slate-700"
+    >
+      <h3 class="text-base sm:text-lg font-bold mb-4 text-secondary flex items-center gap-2">
+        <i class="fa-solid fa-id-card"></i> Edit Profile
+      </h3>
+      <form id="profile-form" class="space-y-3 text-xs sm:text-sm">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Player Name</label>
+          <input
+            type="text"
+            id="profile-name-input"
+            required
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-    <form id="profile-form" class="space-y-3 text-xs sm:text-sm">
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Position</label>
+          <select
+            id="profile-position-input"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          >
+            <option value="Unspecified">Select Position</option>
+            <option value="Goalkeeper">Goalkeeper</option>
+            <option value="Defender">Defender</option>
+            <option value="Midfielder">Midfielder</option>
+            <option value="Forward">Forward</option>
+            <option value="Coach/Staff">Coach/Staff</option>
+          </select>
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Player Name</label>
-        <input
-          type="text"
-          id="profile-name-input"
-          required
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">
+            Club / Country
+          </label>
+          <input
+            type="text"
+            id="profile-club-input"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Position</label>
-        <select
-          id="profile-position-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        >
-          <option value="Unspecified">Select Position</option>
-          <option value="Goalkeeper">Goalkeeper</option>
-          <option value="Defender">Defender</option>
-          <option value="Midfielder">Midfielder</option>
-          <option value="Forward">Forward</option>
-          <option value="Coach/Staff">Coach/Staff</option>
-        </select>
-      </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Phone</label>
+          <input
+            type="tel"
+            id="profile-phone-input"
+            placeholder="+44..."
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Club / Country</label>
-        <input
-          type="text"
-          id="profile-club-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Instagram</label>
+          <input
+            type="text"
+            id="profile-instagram-input"
+            placeholder="@username"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Phone</label>
-        <input
-          type="tel"
-          id="profile-phone-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Twitter / X</label>
+          <input
+            type="text"
+            id="profile-twitter-input"
+            placeholder="@username"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Instagram</label>
-        <input
-          type="text"
-          id="profile-instagram-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">TikTok</label>
+          <input
+            type="text"
+            id="profile-tiktok-input"
+            placeholder="@username"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+          />
+        </div>
 
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">Twitter / X</label>
-        <input
-          type="text"
-          id="profile-twitter-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
-
-      <div>
-        <label class="block text-xs font-medium text-slate-300 mb-1">TikTok</label>
-        <input
-          type="text"
-          id="profile-tiktok-input"
-          class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-        />
-      </div>
-
-      <div class="flex justify-end gap-2 pt-2">
-        <button
-          type="button"
-          id="profile-cancel-btn"
-          class="bg-slate-800 text-slate-200 font-semibold py-2 px-4 rounded-full hover:bg-slate-700 text-xs"
-        >
-          Cancel
-        </button>
-        <button
-          type="submit"
-          class="bg-secondary text-slate-950 font-semibold py-2 px-4 rounded-full hover:bg-emerald-500 text-xs"
-        >
-          Save Profile
-        </button>
-      </div>
-    </form>
+        <div class="flex justify-end gap-2 pt-2">
+          <button
+            type="button"
+            id="profile-cancel-btn"
+            class="bg-slate-800 text-slate-200 font-semibold py-2 px-4 rounded-full hover:bg-slate-700 text-xs"
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            class="bg-secondary text-slate-950 font-semibold py-2 px-4 rounded-full hover:bg-emerald-500 text-xs"
+          >
+            Save Profile
+          </button>
+        </div>
+      </form>
+    </div>
   </div>
-</div>
-  <script type="module" src="./js/app.js"></script>
-<script>
-  console.log("SW disabled");
-</script>
-</body>
-</html>
-        
 
   <!-- FOLLOWERS MODAL -->
   <div
@@ -859,30 +848,9 @@
   </div>
 
   <!-- Firebase & App Scripts -->
-  <div
-    id="profile-modal"
-    class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
-  >
-    <div
-      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto max-h-[90vh] border border-slate-700"
-    >
-      <h3 class="text-base sm:text-lg font-bold mb-4 text-secondary flex items-center gap-2">
-        <i class="fa-solid fa-id-card"></i> Edit Profile
-      </h3>
-      <form id="profile-form" class="space-y-3 text-xs sm:text-sm">
-        <div>
-          <label class="block text-xs font-medium text-slate-300 mb-1">Player Name</label>
-          <input
-            type="text"
-            id="profile-name-input"
-            required
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
-          />
-        </div>
-<script type="module" src="./js/app.js"></script>
+  <script type="module" src="./js/app.js"></script>
   <script>
-  // Service worker for messaging disabled for demo
-  console.log("SW disabled");
+    console.log("SW disabled");
   </script>
 
 </body>
