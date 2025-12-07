@@ -579,7 +579,37 @@
 </footer>
 
 </div> <!-- END OF #app -->
+<!-- MOBILE NAV -->
+<footer class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40">
+  <nav class="flex justify-around text-[11px]">
 
+    <button data-view="home" class="view-btn flex flex-col items-center p-2 text-secondary active-nav">
+      <i class="fa-solid fa-house"></i>
+      <span class="mt-0.5 font-medium">Home</span>
+    </button>
+
+    <button data-view="feed" class="view-btn flex flex-col items-center p-2 text-slate-400">
+      <i class="fa-solid fa-bars-staggered"></i>
+      <span class="mt-0.5 font-medium">Feed</span>
+    </button>
+
+    <button data-view="discover" class="view-btn flex flex-col items-center p-2 text-slate-400">
+      <i class="fa-solid fa-users"></i>
+      <span class="mt-0.5 font-medium">Discover</span>
+    </button>
+
+    <button data-view="highlights" class="view-btn flex flex-col items-center p-2 text-slate-400">
+      <i class="fa-solid fa-film"></i>
+      <span class="mt-0.5 font-medium">Highlights</span>
+    </button>
+
+    <button data-view="chat" class="view-btn flex flex-col items-center p-2 text-slate-400">
+      <i class="fa-solid fa-comments"></i>
+      <span class="mt-0.5 font-medium">Chat</span>
+    </button>
+
+  </nav>
+</footer>
 
 <!-- MAIN APP SCRIPT -->
 <script type="module" src="./js/app.js"></script>
