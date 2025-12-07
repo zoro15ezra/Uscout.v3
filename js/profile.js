@@ -27,16 +27,26 @@ export function initProfile() {
   const profileForm = document.getElementById("profile-form");
   const userIdDisplay = document.getElementById("user-id-display");
 
-  // -----------------------------
-  // 🔥 FIX: GLOWING BUTTON NOW SHOWS FULL PROFILE VIEW
-  // -----------------------------
-  floatingProfileBtn?.addEventListener("click", () => {
-    if (state.currentUserId) {
-      viewUserProfile(state.currentUserId);
-    }
-  });
+  // ------------------------------------------------------------------
+  // 🔥 OVERRIDE FIX — REMOVE ALL OLD LISTENERS FROM GLOWING BUTTON
+  // ------------------------------------------------------------------
+  if (floatingProfileBtn) {
+    const clone = floatingProfileBtn.cloneNode(true);
+    floatingProfileBtn.parentNode.replaceChild(clone, floatingProfileBtn);
+  }
 
-  // Sidebar + header profile buttons keep opening EDIT modal
+  // ------------------------------------------------------------------
+  // 🔥 APPLY CORRECT LISTENER: SHOW FULL PUBLIC PROFILE
+  // ------------------------------------------------------------------
+  document
+    .getElementById("floating-profile-btn")
+    ?.addEventListener("click", () => {
+      if (state.currentUserId) viewUserProfile(state.currentUserId);
+    });
+
+  // ------------------------------------------------------------------
+  // Sidebar + Header buttons STILL open EDIT PROFILE modal
+  // ------------------------------------------------------------------
   openProfileBtn?.addEventListener("click", openEditProfileModal);
   sidebarProfileBtn?.addEventListener("click", openEditProfileModal);
 
@@ -45,7 +55,8 @@ export function initProfile() {
     const p = state.currentUserProfile;
 
     document.getElementById("profile-name-input").value = p.name || "";
-    document.getElementById("profile-position-input").value = p.position || "Unspecified";
+    document.getElementById("profile-position-input").value =
+      p.position || "Unspecified";
     document.getElementById("profile-club-input").value = p.club || "";
     document.getElementById("profile-phone-input").value = p.phone || "";
     document.getElementById("profile-instagram-input").value = p.instagram || "";
@@ -55,8 +66,12 @@ export function initProfile() {
     toggleModal(profileModal, true);
   }
 
-  profileCancelBtn?.addEventListener("click", () => toggleModal(profileModal, false));
+  // Cancel button closes Edit Profile modal
+  profileCancelBtn?.addEventListener("click", () =>
+    toggleModal(profileModal, false)
+  );
 
+  // Save Profile
   profileForm?.addEventListener("submit", async (e) => {
     e.preventDefault();
     if (!state.currentUserId) return;
@@ -81,25 +96,35 @@ export function initProfile() {
     }
   });
 
+  // Copy ID
   userIdDisplay?.addEventListener("click", () => {
     if (!state.currentUserId) return;
     copyToClipboard(state.currentUserId);
     alert("User ID copied to clipboard");
   });
 
-  document.getElementById("followers-btn")?.addEventListener("click", showFollowersModal);
-  document.getElementById("following-btn")?.addEventListener("click", showFollowingModal);
+  // Followers / Following modals
+  document
+    .getElementById("followers-btn")
+    ?.addEventListener("click", showFollowersModal);
+  document
+    .getElementById("following-btn")
+    ?.addEventListener("click", showFollowingModal);
 
   document.getElementById("followers-close-btn")?.addEventListener("click", () =>
     toggleModal(document.getElementById("followers-modal"), false)
   );
-  document.getElementById("following-close-btn")?.addEventListener("click", () =>
-    toggleModal(document.getElementById("following-modal"), false)
-  );
+  document
+    .getElementById("following-close-btn")
+    ?.addEventListener("click", () =>
+      toggleModal(document.getElementById("following-modal"), false)
+    );
 
-  document.getElementById("user-profile-close-btn")?.addEventListener("click", () =>
-    toggleModal(document.getElementById("user-profile-modal"), false)
-  );
+  document
+    .getElementById("user-profile-close-btn")
+    ?.addEventListener("click", () =>
+      toggleModal(document.getElementById("user-profile-modal"), false)
+    );
 
   document.querySelectorAll(".profile-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
@@ -109,9 +134,9 @@ export function initProfile() {
   });
 }
 
-// ----------------------------------------
-// REFRESH PROFILE SIDEBAR
-// ----------------------------------------
+// ------------------------------------------------------------------
+// UPDATE SIDEBAR PROFILE
+// ------------------------------------------------------------------
 export function refreshProfileSidebar() {
   const p = state.currentUserProfile || {};
 
@@ -129,28 +154,18 @@ export function refreshProfileSidebar() {
   if (clubEl) clubEl.textContent = p.club || "Not set";
   if (emailEl) emailEl.textContent = p.email || "Not set";
   if (phoneEl) phoneEl.textContent = p.phone || "Not set";
+
   if (followersCount) followersCount.textContent = (p.followers || []).length;
   if (followingCount) followingCount.textContent = (p.following || []).length;
   if (uidEl) uidEl.textContent = state.currentUserId || "Loading...";
-
-  const ig = document.getElementById("profile-instagram-display");
-  const tw = document.getElementById("profile-twitter-display");
-  const tk = document.getElementById("profile-tiktok-display");
-
-  if (ig) ig.classList.toggle("hidden", !p.instagram);
-  if (tw) tw.classList.toggle("hidden", !p.twitter);
-  if (tk) tk.classList.toggle("hidden", !p.tiktok);
-
-  if (ig && p.instagram) ig.textContent = p.instagram;
-  if (tw && p.twitter) tw.textContent = p.twitter;
-  if (tk && p.tiktok) tk.textContent = p.tiktok;
 }
 
-// ----------------------------------------
+// ------------------------------------------------------------------
 // REAL-TIME USERS LISTENER
-// ----------------------------------------
+// ------------------------------------------------------------------
 export function listenToUsers(onUsersChange) {
   const q = collection(db, COLLECTIONS.USERS);
+
   onSnapshot(
     q,
     (snap) => {
@@ -166,13 +181,13 @@ export function listenToUsers(onUsersChange) {
       refreshProfileSidebar();
       onUsersChange?.(users);
     },
-    (err) => console.error("Users listener error", err)
+    (err) => console.error("Users listener error:", err)
   );
 }
 
-// ----------------------------------------
-// USER PUBLIC PROFILE VIEW
-// ----------------------------------------
+// ------------------------------------------------------------------
+// PUBLIC PROFILE VIEW
+// ------------------------------------------------------------------
 export async function viewUserProfile(userId) {
   const modal = document.getElementById("user-profile-modal");
 
@@ -188,9 +203,14 @@ export async function viewUserProfile(userId) {
     document.getElementById("user-profile-avatar").textContent =
       (data.name || "P")[0].toUpperCase();
 
-    document.getElementById("user-profile-name").textContent = data.name || "Player";
-    document.getElementById("user-profile-position").textContent = data.position || "Player";
-    document.getElementById("user-profile-club").textContent = data.club || "Not specified";
+    document.getElementById("user-profile-name").textContent =
+      data.name || "Player";
+
+    document.getElementById("user-profile-position").textContent =
+      data.position || "Player";
+
+    document.getElementById("user-profile-club").textContent =
+      data.club || "No club listed";
 
     document.getElementById("user-profile-email").textContent = data.email
       ? `Email: ${data.email}`
@@ -200,38 +220,38 @@ export async function viewUserProfile(userId) {
       ? `Phone: ${data.phone}`
       : "";
 
-    // Social links
-    const socialWrap = document.getElementById("user-profile-social");
-    socialWrap.innerHTML = "";
+    // Socials
+    const wrap = document.getElementById("user-profile-social");
+    wrap.innerHTML = "";
 
     if (data.instagram) {
-      const a = document.createElement("a");
-      a.href = `https://instagram.com/${data.instagram.replace("@", "")}`;
-      a.target = "_blank";
-      a.className =
-        "px-2 py-1 rounded-full bg-pink-500/20 text-pink-100 text-[11px] font-semibold";
-      a.textContent = `IG: ${data.instagram}`;
-      socialWrap.appendChild(a);
+      const el = document.createElement("a");
+      el.href = `https://instagram.com/${data.instagram.replace("@", "")}`;
+      el.target = "_blank";
+      el.className =
+        "px-2 py-1 rounded-full bg-pink-500/20 text-pink-100 text-[11px]";
+      el.textContent = `IG: ${data.instagram}`;
+      wrap.appendChild(el);
     }
 
     if (data.twitter) {
-      const a = document.createElement("a");
-      a.href = `https://x.com/${data.twitter.replace("@", "")}`;
-      a.target = "_blank";
-      a.className =
-        "px-2 py-1 rounded-full bg-sky-500/20 text-sky-100 text-[11px] font-semibold";
-      a.textContent = `X: ${data.twitter}`;
-      socialWrap.appendChild(a);
+      const el = document.createElement("a");
+      el.href = `https://x.com/${data.twitter.replace("@", "")}`;
+      el.target = "_blank";
+      el.className =
+        "px-2 py-1 rounded-full bg-sky-500/20 text-sky-100 text-[11px]";
+      el.textContent = `X: ${data.twitter}`;
+      wrap.appendChild(el);
     }
 
     if (data.tiktok) {
-      const a = document.createElement("a");
-      a.href = `https://tiktok.com/@${data.tiktok.replace("@", "")}`;
-      a.target = "_blank";
-      a.className =
-        "px-2 py-1 rounded-full bg-slate-700/40 text-white text-[11px] font-semibold";
-      a.textContent = `TikTok: ${data.tiktok}`;
-      socialWrap.appendChild(a);
+      const el = document.createElement("a");
+      el.href = `https://tiktok.com/@${data.tiktok.replace("@", "")}`;
+      el.target = "_blank";
+      el.className =
+        "px-2 py-1 rounded-full bg-slate-700/40 text-white text-[11px]";
+      el.textContent = `TikTok: ${data.tiktok}`;
+      wrap.appendChild(el);
     }
 
     // Stats
@@ -241,9 +261,11 @@ export async function viewUserProfile(userId) {
     document.getElementById("user-profile-following-count").textContent =
       (data.following || []).length;
 
-    // Follow / Unfollow button
+    // Follow Button
     const followBtn = document.getElementById("user-profile-follow-btn");
-    const isFollowing = (state.currentUserProfile?.following || []).includes(userId);
+    const isFollowing = (state.currentUserProfile?.following || []).includes(
+      userId
+    );
 
     followBtn.textContent = isFollowing ? "Following" : "Follow";
     followBtn.onclick = async () => {
@@ -251,84 +273,91 @@ export async function viewUserProfile(userId) {
       await viewUserProfile(userId);
     };
 
-    // DM button
+    // DM Button
     const msgBtn = document.getElementById("user-profile-message-btn");
-    if (msgBtn) {
-      if (userId === state.currentUserId) {
-        msgBtn.style.display = "none";
-      } else {
-        msgBtn.style.display = "";
-        msgBtn.onclick = () => openDirectChatWith(userId);
-      }
+
+    if (userId === state.currentUserId) {
+      msgBtn.style.display = "none";
+    } else {
+      msgBtn.style.display = "";
+      msgBtn.onclick = () => openDirectChatWith(userId);
     }
 
-    // Posts
+    // Load Posts
     const posts = await loadUserPosts(userId);
-    document.getElementById("user-profile-posts-count").textContent = posts.length;
+    document.getElementById("user-profile-posts-count").textContent =
+      posts.length;
 
-    const postsContainer = document.getElementById("user-profile-posts");
-    postsContainer.innerHTML = "";
+    const postWrap = document.getElementById("user-profile-posts");
+    postWrap.innerHTML = "";
 
-    if (!posts.length) {
-      postsContainer.innerHTML =
+    if (posts.length === 0) {
+      postWrap.innerHTML =
         `<p class="text-center text-slate-400 py-6 text-xs">No posts yet</p>`;
     } else {
       posts.forEach((post) => {
         const div = document.createElement("div");
-        const t = post.timestamp ? formatTime(post.timestamp.toDate()) : "Now";
+        const t = post.timestamp
+          ? formatTime(post.timestamp.toDate())
+          : "Now";
 
-        div.className = "bg-slate-900 p-3 rounded-lg border border-slate-700 text-xs";
+        div.className =
+          "bg-slate-900 p-3 rounded-lg border border-slate-700 text-xs";
         div.innerHTML = `
           <div class="text-[10px] text-slate-400 mb-1">${escapeHtml(t)}</div>
-          <p class="text-slate-50 whitespace-pre-wrap">${escapeHtml(post.content || "")}</p>
-        `;
-
-        postsContainer.appendChild(div);
-      });
-    }
-
-    // Highlights
-    const highlights = await loadUserHighlights(userId);
-    document.getElementById("user-profile-highlights-count").textContent =
-      highlights.length;
-
-    const hContainer = document.getElementById("user-profile-highlights");
-    hContainer.innerHTML = "";
-
-    if (!highlights.length) {
-      hContainer.innerHTML =
-        `<p class="col-span-full text-center text-slate-400 py-6 text-xs">No highlights yet</p>`;
-    } else {
-      highlights.forEach((h) => {
-        const a = document.createElement("a");
-        a.href = h.videoUrl || "#";
-        a.target = "_blank";
-        a.className =
-          "aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg " +
-          "flex flex-col items-center justifycenter p-3 text-white relative overflow-hidden group hover:scale-105 transition";
-
-        a.innerHTML = `
-          <div class="absolute inset-0 bg-black/50 group-hover:bg-black/30 transition"></div>
-          <i class="fa-solid fa-play-circle text-2xl mb-1 relative z-10"></i>
-          <p class="text-[11px] font-semibold text-center relative z-10">${escapeHtml(
-            h.title || "Highlight"
+          <p class="text-slate-50 whitespace-pre-wrap">${escapeHtml(
+            post.content || ""
           )}</p>
         `;
-        hContainer.appendChild(a);
+
+        postWrap.appendChild(div);
       });
     }
 
+    // Load Highlights
+    const highs = await loadUserHighlights(userId);
+    document.getElementById("user-profile-highlights-count").textContent =
+      highs.length;
+
+    const hWrap = document.getElementById("user-profile-highlights");
+    hWrap.innerHTML = "";
+
+    if (highs.length === 0) {
+      hWrap.innerHTML =
+        `<p class="col-span-full text-center text-slate-400 py-6 text-xs">No highlights yet</p>`;
+    } else {
+      highs.forEach((h) => {
+        const a = document.createElement("a");
+        a.href = h.videoUrl;
+        a.target = "_blank";
+        a.className =
+          "aspect-[9/16] bg-gradient-to-br from-slate-700 to-slate-900 rounded-lg p-3 " +
+          "flex flex-col items-center justify-center text-white group overflow-hidden hover:scale-105 transition";
+
+        a.innerHTML = `
+          <div class="absolute inset-0 bg-black/50 group-hover:bg-black/20 transition"></div>
+          <i class="fa-solid fa-play text-2xl relative z-10"></i>
+          <p class="text-[11px] font-semibold relative z-10 mt-1">${escapeHtml(
+            h.title
+          )}</p>
+        `;
+
+        hWrap.appendChild(a);
+      });
+    }
+
+    // SHOW MODAL
     toggleModal(modal, true);
     switchProfileTab("posts");
   } catch (err) {
     console.error("User profile error", err);
-    alert("Failed to load profile");
+    alert("Failed to load profile.");
   }
 }
 
-// ----------------------------------------
-// SWITCH PROFILE TAB
-// ----------------------------------------
+// ------------------------------------------------------------------
+// SWITCH TABS
+// ------------------------------------------------------------------
 function switchProfileTab(tab) {
   const postsTab = document.getElementById("profile-posts-tab");
   const highlightsTab = document.getElementById("profile-highlights-tab");
@@ -354,9 +383,9 @@ function switchProfileTab(tab) {
   });
 }
 
-// ----------------------------------------
+// ------------------------------------------------------------------
 // FOLLOWERS MODAL
-// ----------------------------------------
+// ------------------------------------------------------------------
 async function showFollowersModal() {
   const modal = document.getElementById("followers-modal");
   const list = document.getElementById("followers-list");
@@ -366,9 +395,9 @@ async function showFollowersModal() {
   const p = state.currentUserProfile || {};
   const ids = p.followers || [];
 
-  if (!ids.length) {
+  if (ids.length === 0) {
     list.innerHTML =
-      `<p class="text-slate-400 text-center text-xs">No followers yet</p>`;
+      `<p class="text-center text-slate-400 text-xs">No followers yet</p>`;
     return;
   }
 
@@ -384,27 +413,27 @@ async function showFollowersModal() {
 
     div.innerHTML = `
       <div class="flex items-center gap-3" data-view-user="${u.id}">
-        <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+        <div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold">
           ${escapeHtml((u.name || "P")[0].toUpperCase())}
         </div>
         <div>
-          <p class="font-semibold text-slate-50 text-xs">${escapeHtml(u.name || "Player")}</p>
-          <p class="text-[11px] text-slate-400">${escapeHtml(u.position || "")}</p>
+          <p class="font-semibold text-slate-50 text-xs">${escapeHtml(u.name)}</p>
+          <p class="text-slate-400 text-[11px]">${escapeHtml(u.position || "")}</p>
         </div>
       </div>
     `;
 
-    div.querySelector("[data-view-user]").addEventListener("click", () =>
-      viewUserProfile(u.id)
-    );
+    div.querySelector("[data-view-user]").addEventListener("click", () => {
+      viewUserProfile(u.id);
+    });
 
     list.appendChild(div);
   });
 }
 
-// ----------------------------------------
+// ------------------------------------------------------------------
 // FOLLOWING MODAL
-// ----------------------------------------
+// ------------------------------------------------------------------
 async function showFollowingModal() {
   const modal = document.getElementById("following-modal");
   const list = document.getElementById("following-list");
@@ -414,9 +443,9 @@ async function showFollowingModal() {
   const p = state.currentUserProfile || {};
   const ids = p.following || [];
 
-  if (!ids.length) {
+  if (ids.length === 0) {
     list.innerHTML =
-      `<p class="text-slate-400 text-center text-xs">Not following anyone yet</p>`;
+      `<p class="text-center text-slate-400 text-xs">Not following anyone</p>`;
     return;
   }
 
@@ -426,20 +455,21 @@ async function showFollowingModal() {
     const u = state.allUsers.find((x) => x.id === id);
     if (!u) return;
 
-    const div = document.createElement("div");
     const isFollowing = (p.following || []).includes(id);
 
+    const div = document.createElement("div");
     div.className =
-      "flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 cursor-pointer transition";
+      "flex items-center justify-between p-3 bg-slate-800 rounded-lg hover:bg-slate-700 transition";
 
     div.innerHTML = `
       <div class="flex items-center gap-3">
-        <div class="w-8 h-8 rounded-full bg-emerald-600 flex items-center justify-center text-white font-bold text-xs">
+        <div class="w-8 h-8 flex items-center justify-center rounded-full bg-emerald-600 text-white text-xs font-bold">
           ${escapeHtml((u.name || "P")[0].toUpperCase())}
         </div>
+
         <div>
-          <p class="font-semibold text-slate-50 text-xs">${escapeHtml(u.name || "Player")}</p>
-          <p class="text-[11px] text-slate-400">${escapeHtml(u.position || "")}</p>
+          <p class="font-semibold text-slate-50 text-xs">${escapeHtml(u.name)}</p>
+          <p class="text-slate-400 text-[11px]">${escapeHtml(u.position || "")}</p>
         </div>
       </div>
 
