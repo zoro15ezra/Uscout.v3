@@ -33,6 +33,7 @@
 
   <link rel="stylesheet" href="./css/styles.css" />
 </head>
+
 <body class="min-h-screen bg-slate-950 text-slate-50">
 
   <!-- AUTH SCREEN -->
@@ -63,25 +64,33 @@
               type="email"
               id="login-email"
               required
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-1">Password</label>
             <input
               type="password"
               id="login-password"
               required
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <button
             type="submit"
-            class="w-full bg-secondary text-slate-950 font-bold py-3 rounded-full hover:bg-emerald-500 transition duration-200 text-sm"
+            class="w-full bg-secondary text-slate-950 font-bold py-3 rounded-full 
+                   hover:bg-emerald-500 transition duration-200 text-sm"
           >
             Log In
           </button>
         </form>
+
         <p class="text-center mt-4 text-xs text-slate-400">
           Don't have an account?
           <button
@@ -97,24 +106,31 @@
       <div id="register-form" class="hidden">
         <h2 class="text-xl font-bold mb-4 text-slate-50">Create Account</h2>
         <form id="register-form-el" class="space-y-3">
+
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-1">Player Name</label>
             <input
               type="text"
               id="register-name"
               required
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-1">Email</label>
             <input
               type="email"
               id="register-email"
               required
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-1">
               Password (min 6 characters)
@@ -124,15 +140,20 @@
               id="register-password"
               required
               minlength="6"
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <div>
             <label class="block text-sm font-medium text-slate-300 mb-1">Position</label>
             <select
               id="register-position"
               required
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             >
               <option value="">Select Position</option>
               <option value="Goalkeeper">Goalkeeper</option>
@@ -144,31 +165,42 @@
           </div>
 
           <div>
-            <label class="block text-sm font-medium text-slate-300 mb-1">Phone (optional)</label>
+            <label class="block text-sm font-medium text-slate-300 mb-1">
+              Phone (optional)
+            </label>
             <input
               type="tel"
               id="register-phone"
               placeholder="+44..."
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
+
           <div>
-            <label class="block text-sm font-medium text-slate-300 mb-1">Instagram (optional)</label>
+            <label class="block text-sm font-medium text-slate-300 mb-1">
+              Instagram (optional)
+            </label>
             <input
               type="text"
               id="register-instagram"
               placeholder="@username"
-              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-slate-50 text-sm"
+              class="w-full p-3 bg-slate-900 border border-slate-700 rounded-lg 
+                     focus:ring-2 focus:ring-secondary focus:border-secondary 
+                     text-slate-50 text-sm"
             />
           </div>
 
           <button
             type="submit"
-            class="w-full bg-secondary text-slate-950 font-bold py-3 rounded-full hover:bg-emerald-500 transition duration-200 text-sm"
+            class="w-full bg-secondary text-slate-950 font-bold py-3 rounded-full 
+                   hover:bg-emerald-500 transition duration-200 text-sm"
           >
             Create Account
           </button>
         </form>
+
         <p class="text-center mt-4 text-xs text-slate-400">
           Already have an account?
           <button
@@ -182,17 +214,18 @@
 
       <div
         id="auth-error"
-        class="hidden mt-4 p-3 bg-red-950/60 border border-red-500/60 rounded-lg text-xs text-red-200"
+        class="hidden mt-4 p-3 bg-red-950/60 border border-red-500/60 rounded-lg 
+               text-xs text-red-200"
       ></div>
     </div>
   </div>
-
   <!-- MAIN APP -->
   <div id="app" class="flex flex-col min-h-screen hidden">
 
     <!-- HEADER -->
     <header class="bg-slate-950/95 border-b border-slate-800 backdrop-blur sticky top-0 z-30">
       <div class="max-w-7xl mx-auto px-3 sm:px-4 py-3 flex items-center justify-between gap-2">
+        
         <div class="flex items-center gap-2">
           <div class="w-9 h-9 rounded-full bg-secondary/20 flex items-center justify-center border border-secondary/40">
             <i class="fa-solid fa-futbol text-secondary"></i>
@@ -210,36 +243,46 @@
             id="user-greeting"
             class="hidden md:inline text-xs sm:text-sm font-medium text-slate-300 truncate max-w-[140px] sm:max-w-xs"
           ></span>
+
           <button
             id="open-profile-btn"
-            class="bg-slate-800 text-slate-100 hover:bg-slate-700 px-3 py-1.5 rounded-full text-[11px] font-semibold border border-slate-600"
+            class="bg-slate-800 text-slate-100 hover:bg-slate-700 px-3 py-1.5 rounded-full 
+                   text-[11px] font-semibold border border-slate-600"
           >
             <i class="fa-solid fa-user text-secondary mr-1"></i> Profile
           </button>
+
           <button
             id="logout-btn"
-            class="bg-red-600 text-slate-50 hover:bg-red-500 px-3 py-1.5 rounded-full text-[11px] font-semibold border border-red-500"
+            class="bg-red-600 text-slate-50 hover:bg-red-500 px-3 py-1.5 rounded-full 
+                   text-[11px] font-semibold border border-red-500"
           >
             <i class="fa-solid fa-right-from-bracket mr-1"></i> Logout
           </button>
         </div>
+
       </div>
 
       <!-- DESKTOP NAV -->
       <nav class="hidden sm:flex max-w-7xl mx-auto px-3 sm:px-4 pb-2 border-t border-slate-800">
-        <button data-view="home" class="view-btn flex-1 py-2 text-secondary active-nav flex items-center justify-center text-xs sm:text-sm">
+        <button data-view="home" class="view-btn flex-1 py-2 text-secondary active-nav 
+                                     flex items-center justify-center text-xs sm:text-sm">
           <i class="fa-solid fa-house mr-2"></i> Home
         </button>
-        <button data-view="feed" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 flex items-center justify-center text-xs sm:text-sm">
+        <button data-view="feed" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 
+                                     flex items-center justify-center text-xs sm:text-sm">
           <i class="fa-solid fa-bars-staggered mr-2"></i> Feed
         </button>
-        <button data-view="discover" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 flex items-center justify-center text-xs sm:text-sm">
+        <button data-view="discover" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 
+                                     flex items-center justify-center text-xs sm:text-sm">
           <i class="fa-solid fa-users mr-2"></i> Discover
         </button>
-        <button data-view="highlights" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 flex items-center justify-center text-xs sm:text-sm">
+        <button data-view="highlights" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 
+                                     flex items-center justify-center text-xs sm:text-sm">
           <i class="fa-solid fa-film mr-2"></i> Highlights
         </button>
-        <button data-view="chat" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 flex items-center justify-center text-xs sm:text-sm">
+        <button data-view="chat" class="view-btn flex-1 py-2 text-slate-400 hover:bg-slate-900/60 
+                                     flex items-center justify-center text-xs sm:text-sm">
           <i class="fa-solid fa-comments mr-2"></i> Chat
         </button>
       </nav>
@@ -253,15 +296,22 @@
         id="home-view"
         class="view-container flex items-center justify-center min-h-[60vh] sm:min-h-[70vh] p-4"
       >
-        <div class="relative z-10 text-center p-6 sm:p-10 bg-slate-900/80 backdrop-blur-sm rounded-2xl shadow-2xl max-w-2xl border border-secondary/30">
+        <div class="relative z-10 text-center p-6 sm:p-10 bg-slate-900/80 
+                    backdrop-blur-sm rounded-2xl shadow-2xl max-w-2xl 
+                    border border-secondary/30">
+
           <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-50 mb-4 leading-tight">
             <span class="text-secondary">U.Scout</span> connects players & scouts worldwide.
           </h1>
+
           <p class="text-sm sm:text-base text-slate-300 mb-6 font-medium">
             Build your football profile, showcase highlights, and grow your network.
           </p>
+
           <button
-            class="go-feed-btn bg-secondary text-slate-950 font-bold text-sm sm:text-base py-3 px-7 rounded-full shadow-lg hover:bg-emerald-500 transition duration-300 hover:scale-105"
+            class="go-feed-btn bg-secondary text-slate-950 font-bold 
+                   text-sm sm:text-base py-3 px-7 rounded-full shadow-lg 
+                   hover:bg-emerald-500 transition duration-300 hover:scale-105"
           >
             <i class="fa-solid fa-arrow-right mr-2"></i> Explore the Feed
           </button>
@@ -271,17 +321,21 @@
       <!-- FEED -->
       <section id="feed-view" class="view-container hidden">
 
+        <button
+          id="feed-profile-btn"
+          class="bg-slate-800 text-white px-4 py-2 rounded-lg hidden"
+        >
+          Profile
+        </button>
+
         <!-- FLOATING GLASSY MY PROFILE BUTTON -->
         <button
           id="floating-profile-btn"
           class="fixed bottom-24 right-4 sm:bottom-8 sm:right-8 z-50 
-                 w-14 h-14 sm:w-16 sm:h-16 rounded-full
-                 backdrop-blur-xl bg-white/10 
-                 border border-white/20 shadow-xl 
-                 flex items-center justify-center
-                 hover:scale-110 transition-all duration-300 
-                 hover:bg-white/20 hover:border-white/30
-                 active:scale-95"
+                 w-14 h-14 sm:w-16 sm:h-16 rounded-full backdrop-blur-xl 
+                 bg-white/10 border border-white/20 shadow-xl flex items-center 
+                 justify-center hover:scale-110 transition-all duration-300 
+                 hover:bg-white/20 hover:border-white/30 active:scale-95"
         >
           <i class="fa-solid fa-user text-white text-xl drop-shadow-lg"></i>
         </button>
@@ -292,9 +346,9 @@
           <div class="hidden md:flex md:w-1/3 lg:w-1/4">
             <button
               id="sidebar-profile-btn"
-              class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 rounded-xl 
-                     border border-slate-700 hover:bg-slate-800 transition text-sm flex 
-                     items-center justify-center gap-2"
+              class="w-full bg-slate-900 text-slate-100 font-semibold py-3 px-4 
+                     rounded-xl border border-slate-700 hover:bg-slate-800 
+                     transition text-sm flex items-center justify-center gap-2"
             >
               <i class="fa-solid fa-user text-secondary"></i>
               My Profile
@@ -303,10 +357,12 @@
 
           <!-- MAIN FEED -->
           <section class="flex-grow space-y-4">
+
             <div class="bg-slate-900 p-4 sm:p-5 rounded-xl shadow-lg border border-slate-700">
               <h2 class="text-sm sm:text-base font-bold mb-3 text-secondary flex items-center gap-2">
                 <i class="fa-solid fa-pen-nib"></i> Share Your Update
               </h2>
+
               <textarea
                 id="post-content"
                 rows="3"
@@ -315,13 +371,14 @@
                        duration-150 resize-none text-slate-50 text-sm"
                 placeholder="What's happening on the pitch or off it?"
               ></textarea>
+
               <div class="flex justify-end mt-2">
                 <button
                   id="post-button"
                   class="bg-secondary text-slate-950 font-semibold py-2 px-6 rounded-full 
                          shadow-md hover:bg-emerald-500 transition duration-150 
-                         disabled:bg-emerald-900 disabled:text-emerald-400 disabled:cursor-not-allowed 
-                         text-xs sm:text-sm"
+                         disabled:bg-emerald-900 disabled:text-emerald-400 
+                         disabled:cursor-not-allowed text-xs sm:text-sm"
                   disabled
                 >
                   Post Update
@@ -329,11 +386,9 @@
               </div>
             </div>
 
-            <div
-              id="loading-indicator"
-              class="text-center p-8 text-slate-400 text-xs"
-            >
-              <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+            <div id="loading-indicator" class="text-center p-8 text-slate-400 text-xs">
+              <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary 
+                          border-t-transparent rounded-full mb-2"></div>
               <p>Loading Feed...</p>
             </div>
 
@@ -341,12 +396,12 @@
           </section>
         </div>
       </section>
-
       <!-- DISCOVER -->
       <section id="discover-view" class="view-container hidden">
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
           Discover Players
         </h1>
+
         <p class="text-slate-400 mb-2 text-xs sm:text-sm">
           Connect with players from around the world and grow your network.
         </p>
@@ -359,15 +414,15 @@
             id="discover-search"
             type="text"
             placeholder="Search by name, position, club or social handle"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-2 focus:ring-secondary focus:border-secondary 
+                   text-xs sm:text-sm text-slate-50"
           />
         </div>
 
-        <div
-          id="discover-loading"
-          class="text-center p-8 text-slate-400 text-xs"
-        >
-          <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+        <div id="discover-loading" class="text-center p-8 text-slate-400 text-xs">
+          <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary 
+                      border-t-transparent rounded-full mb-2"></div>
           <p>Loading players...</p>
         </div>
 
@@ -377,11 +432,14 @@
         ></div>
       </section>
 
+
       <!-- HIGHLIGHTS -->
       <section id="highlights-view" class="view-container hidden">
+
         <h1 class="text-xl sm:text-2xl font-extrabold text-slate-50 mb-2 border-b border-slate-800 pb-2">
           Player Highlights
         </h1>
+
         <p class="text-slate-400 mb-4 text-xs sm:text-sm">
           Paste video links to showcase your talent.
         </p>
@@ -396,7 +454,8 @@
             id="highlight-url"
             placeholder="Paste a YouTube / TikTok / Vimeo / MP4 link..."
             class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-                   focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm mb-3"
+                   focus:ring-2 focus:ring-secondary focus:border-secondary 
+                   text-xs sm:text-sm mb-3"
           />
 
           <input
@@ -404,7 +463,8 @@
             id="highlight-title"
             placeholder="Give your highlight a title..."
             class="w-full p-3 bg-slate-950 border border-slate-700 rounded-lg 
-                   focus:ring-2 focus:ring-secondary focus:border-secondary text-xs sm:text-sm"
+                   focus:ring-2 focus:ring-secondary focus:border-secondary 
+                   text-xs sm:text-sm"
           />
 
           <div class="flex justify-end mt-2">
@@ -424,21 +484,24 @@
 
         <div id="highlights-container" class="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4">
           <div id="highlights-loading" class="col-span-full text-center p-8 text-slate-400 text-xs">
-            <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary border-t-transparent rounded-full mb-2"></div>
+            <div class="animate-spin inline-block w-7 h-7 border-4 border-secondary 
+                        border-t-transparent rounded-full mb-2"></div>
             <p>Loading Highlights...</p>
           </div>
         </div>
+
       </section>
 
-      <!-- CHAT (WhatsApp-style with DM list + current chat) -->
+
+      <!-- CHAT -->
       <section id="chat-view" class="view-container hidden">
-        <div
-          class="flex flex-col md:flex-row h-[70vh] bg-slate-900 rounded-xl shadow-lg border border-slate-700 overflow-hidden"
-        >
+        <div class="flex flex-col md:flex-row h-[70vh] bg-slate-900 rounded-xl shadow-lg border border-slate-700 overflow-hidden">
+
           <!-- CHAT LIST -->
           <div
             id="chat-list"
-            class="w-full md:w-1/3 border-b md:border-b-0 md:border-r border-slate-800 p-3 sm:p-4 space-y-4 overflow-y-auto"
+            class="w-full md:w-1/3 border-b md:border-b-0 md:border-r 
+                   border-slate-800 p-3 sm:p-4 space-y-4 overflow-y-auto"
           >
             <div class="flex items-center justify-between">
               <h2 class="text-sm sm:text-base font-bold text-slate-50 flex items-center gap-2">
@@ -448,9 +511,12 @@
 
             <div>
               <p class="text-[11px] text-slate-400 mb-1">Channels</p>
+
               <button
                 data-chat-id="global_team_chat"
-                class="chat-room-btn w-full text-left p-3 bg-slate-950 hover:bg-slate-800 rounded-lg transition duration-150 border border-slate-700 text-xs sm:text-sm"
+                class="chat-room-btn w-full text-left p-3 bg-slate-950 hover:bg-slate-800 
+                       rounded-lg transition duration-150 border border-slate-700
+                       text-xs sm:text-sm"
               >
                 <p class="font-semibold text-secondary flex items-center gap-2">
                   <i class="fa-solid fa-earth-europe"></i> Global Team Chat
@@ -465,96 +531,104 @@
               <div class="flex items-center justify-between mb-1">
                 <p class="text-[11px] text-slate-400">Direct Messages</p>
               </div>
+
               <div id="dm-list" class="space-y-2 text-xs sm:text-sm">
-                <p class="text-[11px] text-slate-500">No chats yet. Start messaging from profiles.</p>
+                <p class="text-[11px] text-slate-500">
+                  No chats yet. Start messaging from profiles.
+                </p>
               </div>
             </div>
+
           </div>
 
           <!-- CHAT ROOM -->
-          <div
-            id="chat-room-container"
-            class="w-full md:w-2/3 flex flex-col"
-          >
-            <div
-              id="chat-room-header"
-              class="p-3 sm:p-4 border-b border-slate-800 bg-slate-950 flex items-center justify-between"
-            >
+          <div id="chat-room-container" class="w-full md:w-2/3 flex flex-col">
+
+            <div id="chat-room-header"
+                 class="p-3 sm:p-4 border-b border-slate-800 bg-slate-950 
+                        flex items-center justify-between">
               <div>
-                <h3
-                  id="chat-room-title"
-                  class="text-xs sm:text-sm font-bold text-slate-50 truncate"
-                >
+                <h3 id="chat-room-title"
+                    class="text-xs sm:text-sm font-bold text-slate-50 truncate">
                   Select a chat
                 </h3>
-                <p
-                  id="chat-room-subtitle"
-                  class="text-[11px] text-slate-400"
-                >
+
+                <p id="chat-room-subtitle"
+                   class="text-[11px] text-slate-400">
                   Choose a conversation or start a new DM.
                 </p>
               </div>
             </div>
 
-            <div
-              id="messages-container"
-              class="flex-grow p-3 sm:p-4 space-y-2 overflow-y-auto text-xs sm:text-sm bg-slate-950"
-            >
-              <div
-                id="chat-placeholder"
-                class="text-center text-slate-500 mt-16 text-xs"
-              >
+            <div id="messages-container"
+                 class="flex-grow p-3 sm:p-4 space-y-2 overflow-y-auto 
+                        text-xs sm:text-sm bg-slate-950">
+
+              <div id="chat-placeholder"
+                   class="text-center text-slate-500 mt-16 text-xs">
                 <i class="fa-solid fa-star text-secondary mb-2"></i>
                 <p>Select a chat on the left or open a player profile to start a DM.</p>
               </div>
+
             </div>
 
-            <div
-              id="chat-input-area"
-              class="p-3 sm:p-4 border-t border-slate-800 bg-slate-950 hidden"
-            >
+            <div id="chat-input-area"
+                 class="p-3 sm:p-4 border-t border-slate-800 bg-slate-950 hidden">
+
               <div class="flex gap-2">
                 <input
                   type="text"
                   id="chat-message-input"
                   placeholder="Type your message..."
-                  class="flex-grow p-3 bg-slate-900 border border-slate-700 rounded-full focus:ring-secondary focus:border-secondary text-xs sm:text-sm text-slate-50"
+                  class="flex-grow p-3 bg-slate-900 border border-slate-700 
+                         rounded-full focus:ring-secondary focus:border-secondary 
+                         text-xs sm:text-sm text-slate-50"
                 />
+
                 <button
                   id="send-chat-btn"
-                  class="bg-secondary text-slate-950 font-semibold py-2 px-4 sm:px-6 rounded-full hover:bg-emerald-500 transition duration-150 text-xs sm:text-sm"
+                  class="bg-secondary text-slate-950 font-semibold py-2 px-4 sm:px-6 
+                         rounded-full hover:bg-emerald-500 transition duration-150 
+                         text-xs sm:text-sm"
                 >
                   Send
                 </button>
               </div>
+
             </div>
+
           </div>
         </div>
       </section>
 
     </main>
-
     <!-- MOBILE NAV -->
     <footer
-      class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 shadow-xl z-40"
+      class="sm:hidden fixed bottom-0 left-0 right-0 bg-slate-950 border-t border-slate-800 
+             shadow-xl z-40"
     >
       <nav class="flex justify-around text-[11px]">
-        <button data-view="home" class="view-btn flex flex-col items-center p-2 text-secondary active-nav">
+        <button data-view="home" class="view-btn flex flex-col items-center p-2 
+                                       text-secondary active-nav">
           <i class="fa-solid fa-house"></i>
           <span class="mt-0.5 font-medium">Home</span>
         </button>
+
         <button data-view="feed" class="view-btn flex flex-col items-center p-2 text-slate-400">
           <i class="fa-solid fa-bars-staggered"></i>
           <span class="mt-0.5 font-medium">Feed</span>
         </button>
+
         <button data-view="discover" class="view-btn flex flex-col items-center p-2 text-slate-400">
           <i class="fa-solid fa-users"></i>
           <span class="mt-0.5 font-medium">Discover</span>
         </button>
+
         <button data-view="highlights" class="view-btn flex flex-col items-center p-2 text-slate-400">
           <i class="fa-solid fa-film"></i>
           <span class="mt-0.5 font-medium">Highlights</span>
         </button>
+
         <button data-view="chat" class="view-btn flex flex-col items-center p-2 text-slate-400">
           <i class="fa-solid fa-comments"></i>
           <span class="mt-0.5 font-medium">Chat</span>
@@ -563,25 +637,31 @@
     </footer>
   </div>
 
+
   <!-- PROFILE EDIT MODAL -->
+  <!-- ONLY ONE VERSION NOW — DUPLICATE REMOVED -->
   <div
     id="profile-modal"
     class="hidden fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center p-4"
   >
     <div
-      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto max-h-[90vh] border border-slate-700"
+      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 sm:p-6 overflow-y-auto 
+             max-h-[90vh] border border-slate-700"
     >
       <h3 class="text-base sm:text-lg font-bold mb-4 text-secondary flex items-center gap-2">
         <i class="fa-solid fa-id-card"></i> Edit Profile
       </h3>
+
       <form id="profile-form" class="space-y-3 text-xs sm:text-sm">
+
         <div>
           <label class="block text-xs font-medium text-slate-300 mb-1">Player Name</label>
           <input
             type="text"
             id="profile-name-input"
             required
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -589,7 +669,8 @@
           <label class="block text-xs font-medium text-slate-300 mb-1">Position</label>
           <select
             id="profile-position-input"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           >
             <option value="Unspecified">Select Position</option>
             <option value="Goalkeeper">Goalkeeper</option>
@@ -601,13 +682,12 @@
         </div>
 
         <div>
-          <label class="block text-xs font-medium text-slate-300 mb-1">
-            Club / Country
-          </label>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Club / Country</label>
           <input
             type="text"
             id="profile-club-input"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -616,8 +696,8 @@
           <input
             type="tel"
             id="profile-phone-input"
-            placeholder="+44..."
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -626,8 +706,8 @@
           <input
             type="text"
             id="profile-instagram-input"
-            placeholder="@username"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -636,8 +716,8 @@
           <input
             type="text"
             id="profile-twitter-input"
-            placeholder="@username"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -646,8 +726,8 @@
           <input
             type="text"
             id="profile-tiktok-input"
-            placeholder="@username"
-            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg focus:ring-secondary focus:border-secondary text-slate-50"
+            class="w-full p-2.5 bg-slate-950 border border-slate-700 rounded-lg 
+                   focus:ring-secondary focus:border-secondary text-slate-50"
           />
         </div>
 
@@ -655,20 +735,26 @@
           <button
             type="button"
             id="profile-cancel-btn"
-            class="bg-slate-800 text-slate-200 font-semibold py-2 px-4 rounded-full hover:bg-slate-700 text-xs"
+            class="bg-slate-800 text-slate-200 font-semibold py-2 px-4 rounded-full 
+                   hover:bg-slate-700 text-xs"
           >
             Cancel
           </button>
+
           <button
             type="submit"
-            class="bg-secondary text-slate-950 font-semibold py-2 px-4 rounded-full hover:bg-emerald-500 text-xs"
+            class="bg-secondary text-slate-950 font-semibold py-2 px-4 rounded-full 
+                   hover:bg-emerald-500 text-xs"
           >
             Save Profile
           </button>
         </div>
+
       </form>
     </div>
   </div>
+
+
 
   <!-- FOLLOWERS MODAL -->
   <div
@@ -676,7 +762,8 @@
     class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
   >
     <div
-      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] overflow-y-auto border border-slate-700"
+      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] 
+             overflow-y-auto border border-slate-700"
     >
       <div class="flex justify-between items-center mb-3">
         <h3 class="text-sm sm:text-base font-bold text-secondary">Followers</h3>
@@ -684,9 +771,12 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
+
       <div id="followers-list" class="space-y-3 text-xs sm:text-sm"></div>
     </div>
   </div>
+
+
 
   <!-- FOLLOWING MODAL -->
   <div
@@ -694,7 +784,8 @@
     class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
   >
     <div
-      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] overflow-y-auto border border-slate-700"
+      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-md p-5 max-h-[80vh] 
+             overflow-y-auto border border-slate-700"
     >
       <div class="flex justify-between items-center mb-3">
         <h3 class="text-sm sm:text-base font-bold text-secondary">Following</h3>
@@ -702,19 +793,21 @@
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
+
       <div id="following-list" class="space-y-3 text-xs sm:text-sm"></div>
     </div>
   </div>
-
   <!-- USER PUBLIC PROFILE MODAL -->
   <div
     id="user-profile-modal"
     class="fixed inset-0 bg-black bg-opacity-70 z-50 hidden items-center justify-center p-4"
   >
     <div
-      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-4xl my-6 max-h-[90vh] overflow-y-auto border border-slate-700"
+      class="bg-slate-900 rounded-xl shadow-2xl w-full max-w-4xl my-6 max-h-[90vh] 
+             overflow-y-auto border border-slate-700"
     >
       <div class="bg-gradient-to-r from-emerald-600 to-emerald-700 p-5 sm:p-6 relative">
+
         <button
           id="user-profile-close-btn"
           class="absolute top-3 right-3 text-white/80 hover:text-white text-sm"
@@ -724,27 +817,22 @@
 
         <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
           <div
-            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white flex items-center justify-center text-emerald-700 font-bold text-2xl sm:text-3xl shadow-lg"
+            class="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-white flex items-center 
+                   justify-center text-emerald-700 font-bold text-2xl sm:text-3xl shadow-lg"
           >
             <span id="user-profile-avatar"></span>
           </div>
+
           <div class="text-white">
-            <h2
-              id="user-profile-name"
-              class="text-2xl sm:text-3xl font-bold mb-1"
-            >
+            <h2 id="user-profile-name" class="text-2xl sm:text-3xl font-bold mb-1">
               Player Name
             </h2>
-            <p
-              id="user-profile-position"
-              class="text-emerald-100 text-sm sm:text-lg"
-            >
+
+            <p id="user-profile-position" class="text-emerald-100 text-sm sm:text-lg">
               Position
             </p>
-            <p
-              id="user-profile-club"
-              class="text-emerald-50 text-xs sm:text-sm mt-1"
-            >
+
+            <p id="user-profile-club" class="text-emerald-50 text-xs sm:text-sm mt-1">
               Club
             </p>
 
@@ -758,39 +846,22 @@
 
         <div class="flex flex-wrap gap-4 mt-4 text-white text-[11px] sm:text-xs">
           <div>
-            <span
-              id="user-profile-followers-count"
-              class="font-bold text-lg sm:text-xl"
-            >
-              0
-            </span>
+            <span id="user-profile-followers-count" class="font-bold text-lg sm:text-xl">0</span>
             <span class="text-emerald-100 ml-1">Followers</span>
           </div>
+
           <div>
-            <span
-              id="user-profile-following-count"
-              class="font-bold text-lg sm:text-xl"
-            >
-              0
-            </span>
+            <span id="user-profile-following-count" class="font-bold text-lg sm:text-xl">0</span>
             <span class="text-emerald-100 ml-1">Following</span>
           </div>
+
           <div>
-            <span
-              id="user-profile-posts-count"
-              class="font-bold text-lg sm:text-xl"
-            >
-              0
-            </span>
+            <span id="user-profile-posts-count" class="font-bold text-lg sm:text-xl">0</span>
             <span class="text-emerald-100 ml-1">Posts</span>
           </div>
+
           <div>
-            <span
-              id="user-profile-highlights-count"
-              class="font-bold text-lg sm:text-xl"
-            >
-              0
-            </span>
+            <span id="user-profile-highlights-count" class="font-bold text-lg sm:text-xl">0</span>
             <span class="text-emerald-100 ml-1">Highlights</span>
           </div>
         </div>
@@ -798,13 +869,16 @@
         <div class="mt-4 flex flex-wrap gap-2">
           <button
             id="user-profile-follow-btn"
-            class="bg-white text-emerald-700 font-semibold py-2 px-6 rounded-full hover:bg-emerald-50 text-xs sm:text-sm"
+            class="bg-white text-emerald-700 font-semibold py-2 px-6 rounded-full 
+                   hover:bg-emerald-50 text-xs sm:text-sm"
           >
             Follow
           </button>
+
           <button
             id="user-profile-message-btn"
-            class="bg-emerald-900/40 text-white font-semibold py-2 px-6 rounded-full hover:bg-emerald-800 text-xs sm:text-sm flex items-center gap-2"
+            class="bg-emerald-900/40 text-white font-semibold py-2 px-6 rounded-full 
+                   hover:bg-emerald-800 text-xs sm:text-sm flex items-center gap-2"
           >
             <i class="fa-solid fa-paper-plane"></i> Message
           </button>
@@ -815,13 +889,16 @@
         <nav class="flex text-xs sm:text-sm">
           <button
             data-profile-tab="posts"
-            class="profile-tab flex-1 py-2 px-4 text-center font-semibold text-secondary border-b-2 border-secondary"
+            class="profile-tab flex-1 py-2 px-4 text-center font-semibold 
+                   text-secondary border-b-2 border-secondary"
           >
             Posts
           </button>
+
           <button
             data-profile-tab="highlights"
-            class="profile-tab flex-1 py-2 px-4 text-center font-semibold text-slate-400 hover:text-slate-100"
+            class="profile-tab flex-1 py-2 px-4 text-center font-semibold 
+                   text-slate-400 hover:text-slate-100"
           >
             Highlights
           </button>
@@ -835,10 +912,7 @@
       </div>
 
       <div id="profile-highlights-tab" class="p-4 sm:p-6 hidden">
-        <div
-          id="user-profile-highlights"
-          class="grid grid-cols-2 md:grid-cols-3 gap-3"
-        >
+        <div id="user-profile-highlights" class="grid grid-cols-2 md:grid-cols-3 gap-3">
           <p class="col-span-full text-center text-slate-400 py-6 text-xs sm:text-sm">
             Loading highlights...
           </p>
@@ -847,9 +921,11 @@
     </div>
   </div>
 
-  <!-- Firebase & App Scripts -->
+
+  <!-- SCRIPTS -->
   <script type="module" src="./js/app.js"></script>
   <script>
+    // Service worker disabled for demo
     console.log("SW disabled");
   </script>
 
