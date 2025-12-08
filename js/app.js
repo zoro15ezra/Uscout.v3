@@ -1,4 +1,4 @@
-// js/app.js (FINAL FIXED VERSION)
+
 
 import { state } from "./firebase.js";
 import { initAuth } from "./auth.js";
