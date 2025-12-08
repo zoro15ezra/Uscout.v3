@@ -1,6 +1,3 @@
-/* =========================
-   Base + Variables
-   ========================= */
 
 :root {
   --slate-950: #020617;
@@ -27,9 +24,6 @@
   --shadow-soft: 0 10px 30px rgba(15, 23, 42, 0.6);
 }
 
-/* =========================
-   Global
-   ========================= */
 
 html,
 body {
@@ -93,8 +87,7 @@ body {
   border: 1px solid var(--slate-700);
 }
 
-/* Modals – Tailwind already handles most styles via classes;
-   these are just safe fallbacks if needed */
+
 .modal-open {
   display: flex !important;
 }
@@ -127,9 +120,6 @@ body {
    Glassy Floating My Profile Button
    ========================= */
 
-/* Base glassy look is mainly from Tailwind utility classes in index.html.
-   Here we add glow + a bit of extra polish. */
-
 #floating-profile-btn {
   box-shadow:
     0 0 20px rgba(16, 185, 129, 0.25),
@@ -149,9 +139,7 @@ body {
   pointer-events: none;
 }
 
-/* =========================
-   Small Responsive Tweaks
-   ========================= */
+
 
 @media (max-width: 640px) {
   /* Keep content above the mobile nav */
