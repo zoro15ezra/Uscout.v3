@@ -1,4 +1,4 @@
-// js/chat.js (UPDATED FOR SUBCOLLECTIONS)
+
 import { db, COLLECTIONS, state } from "./firebase.js";
 import {
   doc,
